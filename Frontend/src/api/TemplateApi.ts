@@ -1,9 +1,5 @@
-import { Week } from "../components/Home/CreateTemplate/CreateTemplate";
+import { Template} from "../components/Home/CreateTemplate/CreateTemplate";
 
-export type Template = {
-    name: string;
-    weeks: Week[];
-}
 
 const BASE_URL = "http://localhost:5131/api/Templates";
 

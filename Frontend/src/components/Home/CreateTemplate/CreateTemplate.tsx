@@ -3,10 +3,12 @@ import WeekTable from "./WeekTable/WeekTable"
 import { CalendarEvent } from "./WeekTable/Event/CalendarEvent";
 import { convertToGoogle } from "./helpers";
 import { useNavigate } from "react-router-dom";
+import { saveCalendarTemplate } from "../../../api/TemplateApi";
 
 export type Template = {
-    templateName: string
-    weeks : Week[]
+    userEmail: string;
+    name: string;
+    weeks : Week[];
 }
 
 export type Week = {
@@ -67,13 +69,16 @@ function CreateTemplate({setTemplates} : Props) {
         };
     
         const template: Template = {
-            templateName: templateName.value,
+            userEmail: sessionStorage.getItem("email")!,
+            name: templateName.value,
             weeks : weeks
         };
 
-        setTemplates(oldTemplates => [...oldTemplates, template])
+        saveCalendarTemplate(template);
         navigate("/home")
     }
+
+    
 
     
     return (
