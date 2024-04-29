@@ -13,7 +13,7 @@ const LOGIN_URL = `https://accounts.google.com/o/oauth2/v2/auth?scope=https://ww
 
 
 function App() {
-  const [profile, setProfile] = useState<User>();  
+  const [profile, setProfile] = useState<User>();
 
   if (location.hash) {
     const params = new URLSearchParams(location.hash);
@@ -24,64 +24,15 @@ function App() {
   };
 
 
-  const { data, isLoading } = useQuery({
-    queryKey: ["user"],
-    queryFn: getUser
-  })
-
-
-  const createProfile = () => {
-    const user: User = {
-      picture: data.photos[0].url,
-      name: data.names[0].displayName,
-      email: data.emailAddresses[0].value
-    }
-    setProfile(user);
-    setCookie("email", data.emailAddresses[0].value, 1);
-  }
+ 
+  
 
   const login = () => {
     location.href = LOGIN_URL + import.meta.env.VITE_APP_CLIENT_ID;
   }
 
-  const logOut = () => {
-    setProfile(undefined);
-    deleteCookie("access_token");
-    deleteCookie("google_login_key");
-    window.location.reload();
-  };
-
-
-  if (data && !profile) {
-    createProfile();
-  }
-
   return (
-    <>
-      <div>
-        {isLoading && <p>Loading ...</p>}
-        <h2>React Google Login</h2>
-        <br />
-        <br />
-        {profile ? (
-          <div>
-            <img src={profile.picture} alt="user image" />
-            <h3>User Logged in</h3>
-            <p>Name: {profile.name}</p>
-            <p>Email Address: {profile.email}</p>
-            <br />
-            <br />
-            <button onClick={logOut}>Log out</button>
-          </div>
-        ) : (
-          <Login />
-        )}
-      </div>
-
-      <Home />
-
-      <Overview />
-    </>
+    <Home />
   )
 
 }

@@ -18,9 +18,17 @@ function Home() {
   const [templates, setTemplates] = useState<Template[]>([])
   const pathArray = pathname.split("/")
   const [profile, setProfile] = useState<User>();
+
+  if(profile && !getCookie("email"))
+    {
+      setCookie("email", profile.email, 1);
+    }
+
+
   const logOut = () => {
     setProfile(undefined);
     deleteCookie("access_token");
+    deleteCookie("google_login_key");
     window.location.reload();
   };
 
