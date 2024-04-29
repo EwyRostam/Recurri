@@ -3,7 +3,7 @@ import { useLocation, useNavigate } from "react-router-dom";
 import { Template, Week } from "../CreateTemplate/CreateTemplate";
 import {CalendarEvent} from "../CreateTemplate/WeekTable/Event/CalendarEvent";
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
-import { getTemplateById, saveCalendarTemplate } from "../../../api/TemplateApi";
+import { editTemplate, getTemplateById, saveCalendarTemplate } from "../../../api/TemplateApi";
 import { convertToGoogle } from "../CreateTemplate/helpers";
 import WeekTable from "../CreateTemplate/WeekTable/WeekTable";
 
@@ -68,7 +68,7 @@ function EditTemplate() {
 
     const mutation = useMutation({
         mutationFn: (template: Template) => {
-          return saveCalendarTemplate(template);
+          return editTemplate(template);
     
         },
         onSuccess: () => {
@@ -87,9 +87,9 @@ function EditTemplate() {
             name: name.value,
             weeks: weeks
         };
-
+        console.log(template)
         mutation.mutate(template);
-        navigate("/home")
+
     }
 
     if (isLoading) {
@@ -103,8 +103,8 @@ function EditTemplate() {
             <form action="" onSubmit={handleSubmit} className="flex flex-col gap-4">
                 <input type="text" name="name" className="input input-bordered w-full input-sm max-w-xs" value={template!.name} placeholder="Template name" />
                 <button type="button" onClick={handleAddWeek} className="btn btn-sm max-w-48">+ Add Week</button>
-                <WeekTable weeks={weeks} handleAddEvent={handleAddEvent} setWeeks={setWeeks} CustomRef={CustomRef} />
-                <input type="submit" className="btn btn-sm mt-4 max-w-48" value="Create Template" />
+                <WeekTable weeks={template!.weeks} handleAddEvent={handleAddEvent} setWeeks={setWeeks} CustomRef={CustomRef} />
+                <input type="submit" className="btn btn-sm mt-4 max-w-48" value="Edit Template" />
                 <button className="btn btn-sm max-w-48" onClick={() => convertToGoogle(weeks, new Date())}> Convert To google </button>
             </form>
         </section>

@@ -1,7 +1,24 @@
 import { Template} from "../components/Home/CreateTemplate/CreateTemplate";
+import { getCookie } from "../helpers/CookieHelpers";
 
 
 const BASE_URL = "http://localhost:5131/api/Templates";
+
+
+export async function editTemplate(template: Template) {
+
+  const response = await fetch(BASE_URL+"/"+template.id, {
+    method: "PUT",
+    headers: {
+      "Content-type": "application/json; charset=UTF-8",
+      Authorization: `Bearer ${getCookie("google_login_key")}`,
+    },
+    body: JSON.stringify(template),
+  });
+  const data = await response.json();
+  console.log(data);
+  return data;
+}
 
 export async function saveCalendarTemplate(eventTemplate: Template) {
      {
