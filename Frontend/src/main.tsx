@@ -1,11 +1,12 @@
 import React from 'react'
 import ReactDOM from 'react-dom/client'
 import './index.css'
-import { RouterProvider,createBrowserRouter } from 'react-router-dom'
+import { RouterProvider, createBrowserRouter } from 'react-router-dom'
 import Home from './components/Home/Home';
 import AboutUs from './components/AboutUs/AboutUs';
 import Login from './components/Login/Login';
 import { GoogleOAuthProvider } from '@react-oauth/google';
+import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 
 
 
@@ -43,12 +44,15 @@ const router = createBrowserRouter([
     element: <Login />,
   },
 ]);
+const queryClient = new QueryClient();
 
 ReactDOM.createRoot(document.getElementById('root')!).render(
-  
-  <GoogleOAuthProvider clientId="1021052820543-fm1vrkkpkq1idpvckttevn0ir9d9qdc2.apps.googleusercontent.com">
+
+  <GoogleOAuthProvider clientId={import.meta.env.VITE_APP_CLIENT_ID}>
     <React.StrictMode>
-      <RouterProvider router={router} />
+      <QueryClientProvider client={queryClient}>
+        <RouterProvider router={router} />
+      </QueryClientProvider>
     </React.StrictMode>
   </GoogleOAuthProvider>
 )

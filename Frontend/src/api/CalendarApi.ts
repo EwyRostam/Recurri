@@ -1,4 +1,5 @@
 import { getCookie } from "../helpers/CookieHelpers";
+import { sprint } from "../templates/Sprint";
 import { saltEvent } from "../templates/SaltTemplate";
 import { singleEvent } from "../templates/SingleEvent";
 import { GoogleEvent } from "../components/event/CalendarEvent";
@@ -38,7 +39,7 @@ export async function createCalendarEvent() {
 export async function createCalendarTemplate(eventTemplate: GoogleEvent[]) {
   const promises = eventTemplate.map(async (event) => {
     const response = await fetch(
-      BASE_URL,
+      "https://www.googleapis.com/calendar/v3/calendars/primary/events",
       {
         method: "POST",
         headers: {
@@ -77,10 +78,12 @@ export async function createSprint() {
   });
 }
 
-export const getSingleEvent = async (eventId: string): Promise<EventData | null> => {
+export const getSingleEvent = async (): Promise<EventData | null> => {
   try {
     const response = await fetch(
-      BASE_URL +`/${eventId}?key=`+import.meta.env.VITE_APP_API_KEY,
+      BASE_URL +
+        "/vjp0ov2kgqgealhn2aptl9h89o?key=" +
+        import.meta.env.VITE_APP_API_KEY,
       {
         headers: {
           Authorization: `Bearer ${getCookie("access_token")}`,
@@ -115,10 +118,15 @@ export async function deleteCalendarEvent(eventId: string) {
   alert("Event deleted, check your Google Calendar!");
 }
 
-export const getReocurringEvents = async (template: string): Promise<string[] | null> => {
+export const getReocurringEvents = async (
+  template: string
+): Promise<string[] | null> => {
   try {
     const response = await fetch(
-      BASE_URL +`?sharedExtendedProperty=template%3D${template}&key=${import.meta.env.VITE_APP_API_KEY}`,
+      BASE_URL +
+        `?sharedExtendedProperty=template%3D${template}&key=${
+          import.meta.env.VITE_APP_API_KEY
+        }`,
       {
         headers: {
           Authorization: `Bearer ${getCookie("access_token")}`,
@@ -152,9 +160,9 @@ export async function deleteTemplate(template: string) {
   else{console.log("Could not find any events with template ", template)}
 }
 
-export async function changeDate(eventId: string, startTime: string, endTime: string): Promise<EventData | null> {
+export async function changeDate(): Promise<EventData | null> {
   try {
-    const response = await fetch(`${BASE_URL}/${eventId}?key=${import.meta.env.VITE_APP_API_KEY}`, { 
+    const response = await fetch(`${BASE_URL}/4d37mthif0j56un9on7se6pbio_20240911T080000Z?key=${import.meta.env.VITE_APP_API_KEY}`, { 
       method: "PATCH",
       headers: {
         Authorization: `Bearer ${getCookie("access_token")}`,
@@ -163,11 +171,11 @@ export async function changeDate(eventId: string, startTime: string, endTime: st
       },
       body: JSON.stringify({
         "start": {
-          "dateTime": startTime,
+          "dateTime": "2024-09-18T10:00:00+02:00",
           "timeZone": "Europe/Stockholm"
         },
         "end": {
-          "dateTime": endTime,
+          "dateTime": "2024-09-18T10:15:00+02:00",
           "timeZone": "Europe/Stockholm"
         },
         "status": "confirmed"
