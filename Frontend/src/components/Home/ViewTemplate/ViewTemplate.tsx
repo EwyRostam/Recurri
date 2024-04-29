@@ -21,8 +21,8 @@ function ViewTemplate() {
     });
 
     if (isLoading) return <p>Loading...</p>
-    console.log(template)
     if (isError) return <p>An error occured</p>
+    console.log(template)
     return (
 
         <div className="drawer lg:drawer-open">
