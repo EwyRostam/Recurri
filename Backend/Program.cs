@@ -1,3 +1,6 @@
+using Backend.Data;
+using Microsoft.EntityFrameworkCore;
+
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
@@ -7,7 +10,18 @@ builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
+builder.Services.AddDbContext<TemplateContext>(options =>
+options.UseSqlServer(builder.Configuration
+.GetConnectionString("TemplateContext") ?? throw new InvalidOperationException("Connection string 'TemplateContext' not found.")));
+
+builder.Services.AddCors();
+
 var app = builder.Build();
+
+app.UseCors(x => x
+                    .AllowAnyMethod()
+                    .AllowAnyHeader()
+                    .AllowAnyOrigin());
 
 
 app.UseSwagger();
