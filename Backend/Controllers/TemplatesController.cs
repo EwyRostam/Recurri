@@ -46,5 +46,16 @@ namespace Backend.Controllers
             return template;
         }
 
+        [HttpPost]
+        public async Task<ActionResult<Template>> PostTemplate(Template template)
+        {
+            await _context.Templates.AddAsync(template);
+            template.Weeks.Select(week => _context.Weeks.Add(week));
+            await _context.SaveChangesAsync();
+
+            return CreatedAtAction("GetTemplate", new { id = template.Id }, template);
+        }
+
+
     }
 }
