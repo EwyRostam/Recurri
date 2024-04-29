@@ -14,15 +14,17 @@ function ViewTemplate() {
 
 
     const { data: template, isLoading, isError } = useQuery({
-        queryKey: ['templates'],
+        queryKey: ['templates' , pathArray[pathArray.length - 1]],
         queryFn: () => getTemplateById(pathArray[pathArray.length - 1])
         
         
     });
 
-    if (isLoading) return <p>Loading...</p>
+    if (isLoading) {
+        return (<p>Loading...</p>)
+    }
     if (isError) return <p>An error occured</p>
-    console.log(template)
+
     return (
 
         <div className="drawer lg:drawer-open">

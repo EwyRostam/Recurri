@@ -6,6 +6,7 @@ type Props = {
 }
 
 function ViewWeek({weeks}:Props) {
+    console.log(weeks)
   return (
     <section className="flex items-center flex-col gap-4">
     {weeks.map((week, index) => {
