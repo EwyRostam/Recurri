@@ -12,7 +12,7 @@ namespace Backend.Controllers
 
     public class TemplatesController : ControllerBase
     {
-         private readonly TemplateContext _context;
+        private readonly TemplateContext _context;
 
         public TemplatesController(TemplateContext context)
         {
@@ -30,5 +30,21 @@ namespace Backend.Controllers
             .Where(template => template.UserEmail == userEmail)
             .ToListAsync();
         }
+
+        [HttpGet("{id}")]
+        public async Task<ActionResult<Template>> GetTemplate(int id)
+        {
+            var template = await _context.Templates
+            .Include(t => t.Weeks)
+            .ThenInclude(w => w.Events).FirstOrDefaultAsync(t => t.Id == id);
+
+            if (template == null)
+            {
+                return NotFound();
+            }
+
+            return template;
+        }
+
     }
 }
