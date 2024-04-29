@@ -1,6 +1,5 @@
 import { Link, useLocation } from "react-router-dom";
 import ViewWeek from "./components/ViewWeek";
-import { Template } from "../CreateTemplate/CreateTemplate";
 import { useQuery } from "@tanstack/react-query";
 import { getTemplateById } from "../../../api/TemplateApi";
 
