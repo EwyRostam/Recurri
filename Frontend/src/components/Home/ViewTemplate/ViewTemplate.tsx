@@ -1,12 +1,13 @@
-import { Link, useLocation } from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 import ViewWeek from "./components/ViewWeek";
-import { useQuery } from "@tanstack/react-query";
-import { getTemplateById } from "../../../api/TemplateApi";
+import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
+import { deleteTemplate, getTemplateById } from "../../../api/TemplateApi";
 
 
 
 function ViewTemplate() {
     const location = useLocation();
+    const navigate = useNavigate();
     const { pathname } = location;
     const pathArray = pathname.split("/")
     
@@ -18,6 +19,23 @@ function ViewTemplate() {
         
         
     });
+
+    const queryClient = useQueryClient();
+
+    const mutation = useMutation({
+        mutationFn: () => {
+            return deleteTemplate(pathArray[pathArray.length - 1]);
+        },
+        onSuccess: () => {
+          queryClient.invalidateQueries({queryKey:['templates']})
+          navigate("/home")
+        }
+      })
+
+    const deleteTemplateById = () => {
+        mutation.mutate();
+        navigate("/home")
+    }
 
     if (isLoading) {
         return (<p>Loading...</p>)
@@ -49,7 +67,7 @@ function ViewTemplate() {
                 {<ViewWeek weeks={template!.weeks} />}
                 <div className="pt-4 flex gap-4">
                     <button className="btn btn-sm py-1 max-w-xs btn-success text-white">Apply Template </button>
-                    <button className="btn btn-sm py-1 max-w-xs btn-error text-white">Delete Template </button>
+                    <button onClick={() => deleteTemplateById()} className="btn btn-sm py-1 max-w-xs btn-error text-white">Delete Template </button>
                     <button className="btn btn-sm py-1 max-w-xs btn-info text-white"> Preview Template </button>
                 </div>
                 </section>
