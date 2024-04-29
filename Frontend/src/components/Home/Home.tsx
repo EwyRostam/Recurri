@@ -59,7 +59,7 @@ function Home() {
                 </ul>
               </div>
 
-              {pathname == "/home" ? <Overview templates={templates} /> : <CreateTemplate setTemplates={setTemplates} />}
+              {pathname == "/home" ? <Overview/> : <CreateTemplate setTemplates={setTemplates} />}
 
             </div>
             <div className="drawer-side">
