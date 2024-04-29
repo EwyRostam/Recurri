@@ -35,3 +35,17 @@ export async function saveCalendarTemplate(eventTemplate: Template) {
     console.log(data);
     return data as Template;
   }
+
+  export async function deleteTemplate(id: string) {
+    const response = await fetch(`${BASE_URL}/${id}`,
+    {
+      method: "DELETE",
+      headers: {
+        "Content-type": "application/json; charset=UTF-8",
+      }
+    }
+    );
+    const data = await response.json();
+    console.log(data);
+    return data as Template;
+  }

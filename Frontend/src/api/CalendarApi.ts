@@ -1,8 +1,7 @@
+import { Template } from "../components/Home/CreateTemplate/CreateTemplate";
+import { GoogleEvent } from "../components/Home/CreateTemplate/WeekTable/Event/CalendarEvent";
 import { getCookie } from "../helpers/CookieHelpers";
-import { sprint } from "../templates/Sprint";
-import { saltEvent } from "../templates/SaltTemplate";
-import { singleEvent } from "../templates/SingleEvent";
-import { GoogleEvent } from "../components/event/CalendarEvent";
+
 
 interface EventData {
   summary: string;
@@ -22,7 +21,7 @@ const BASE_URL =
 
 
 
-export async function createCalendarEvent() {
+export async function createCalendarEvent(singleEvent: Event) {
   await fetch(BASE_URL, {
     method: "POST",
     headers: {
@@ -64,7 +63,7 @@ export async function createCalendarTemplate(eventTemplate: GoogleEvent[]) {
   }
 }
 
-export async function createSprint() {
+export async function createSprint(saltEvent: Template) {
   await fetch(BASE_URL, {
     method: "POST",
     headers: {
