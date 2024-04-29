@@ -1,8 +1,8 @@
 import { Link, useLocation } from "react-router-dom"
 import CreateTemplate, { Template } from "./CreateTemplate/CreateTemplate"
 import Overview from "./Overview/Overview"
-import { useState } from "react";
-import { deleteCookie } from "../../helpers/CookieHelpers";
+import { useEffect, useState } from "react";
+import { deleteCookie, getCookie, setCookie } from "../../helpers/CookieHelpers";
 import { GoogleLogin } from "@react-oauth/google";
 import { jwtDecode } from 'jwt-decode';
 
@@ -23,6 +23,15 @@ function Home() {
     deleteCookie("access_token");
     window.location.reload();
   };
+
+  useEffect(() => {
+    const googleCookie = getCookie("google_login_key");
+
+    if (googleCookie != undefined) {
+      setProfile(jwtDecode(googleCookie))
+    }
+
+  }, [])
 
 
   
