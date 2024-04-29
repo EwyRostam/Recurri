@@ -13,11 +13,7 @@ const LOGIN_URL = `https://accounts.google.com/o/oauth2/v2/auth?scope=https://ww
 
 
 function App() {
-  const [profile, setProfile] = useState<User>();
-
-  if (profile) {
-    sessionStorage.setItem("email", profile!.email);
-  }
+  const [profile, setProfile] = useState<User>();  
 
   if (location.hash) {
     const params = new URLSearchParams(location.hash);
@@ -41,6 +37,7 @@ function App() {
       email: data.emailAddresses[0].value
     }
     setProfile(user);
+    setCookie("email", data.emailAddresses[0].value, 1);
   }
 
   const login = () => {
@@ -50,6 +47,7 @@ function App() {
   const logOut = () => {
     setProfile(undefined);
     deleteCookie("access_token");
+    deleteCookie("google_login_key");
     window.location.reload();
   };
 

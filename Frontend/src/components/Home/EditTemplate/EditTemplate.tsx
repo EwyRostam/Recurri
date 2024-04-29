@@ -6,6 +6,7 @@ import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 import { editTemplate, getTemplateById, saveCalendarTemplate } from "../../../api/TemplateApi";
 import { convertToGoogle } from "../CreateTemplate/helpers";
 import WeekTable from "../CreateTemplate/WeekTable/WeekTable";
+import { getCookie } from "../../../helpers/CookieHelpers";
 
 function EditTemplate() {
     const navigate = useNavigate();
@@ -83,7 +84,7 @@ function EditTemplate() {
         };
 
         const template: Template = {
-            userEmail: sessionStorage.getItem("email")!,
+            userEmail: getCookie("email")!,
             name: name.value,
             weeks: weeks,
             id: pathArray[pathArray.length - 1]
