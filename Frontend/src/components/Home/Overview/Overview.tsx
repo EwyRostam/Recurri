@@ -9,10 +9,12 @@ function Overview() {
         queryFn: getAllTemplates
     });
 
+    if (isLoading) return <p>Loading...</p>
+    if (isError) return <p>An error occured</p>
+    
     return (
         <>
-            {isLoading && <p>Loading...</p>}
-            {isError && <p>An error occured</p>}
+            
             <section className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 px-4">
 
                 <div className="border border-black pb-[100%] relative">

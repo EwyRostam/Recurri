@@ -2,6 +2,7 @@ import { Link, useLocation } from "react-router-dom";
 import ViewWeek from "./components/ViewWeek";
 import { Template } from "../CreateTemplate/CreateTemplate";
 import { useQuery } from "@tanstack/react-query";
+import { getTemplateById } from "../../../api/TemplateApi";
 
 
 
@@ -9,12 +10,19 @@ function ViewTemplate() {
     const location = useLocation();
     const { pathname } = location;
     const pathArray = pathname.split("/")
+    
 
-    const { data, isLoading, isError } = useQuery({
+
+    const { data: template, isLoading, isError } = useQuery({
         queryKey: ['templates'],
-        queryFn: getAllTemplates
+        queryFn: () => getTemplateById(pathArray[pathArray.length - 1])
+        
+        
     });
 
+    if (isLoading) return <p>Loading...</p>
+    console.log(template)
+    if (isError) return <p>An error occured</p>
     return (
 
         <div className="drawer lg:drawer-open">
@@ -36,8 +44,8 @@ function ViewTemplate() {
                     </ul>
                 </div>
                 <section className="w-11/12 mx-auto">
-                <h1 className="pb-4">{template.templateName}</h1>
-                {<ViewWeek weeks={template.weeks} />}
+                <h1 className="pb-4">{template!.name}</h1>
+                {<ViewWeek weeks={template!.weeks} />}
                 <div className="pt-4 flex gap-4">
                     <button className="btn btn-sm py-1 max-w-xs btn-success text-white">Apply Template </button>
                     <button className="btn btn-sm py-1 max-w-xs btn-error text-white">Delete Template </button>

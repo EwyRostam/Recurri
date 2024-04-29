@@ -28,3 +28,10 @@ export async function saveCalendarTemplate(eventTemplate: Template) {
     console.log(data);
     return data as Template[];
   }
+
+  export async function getTemplateById(id: string): Promise<Template>{
+    const response = await fetch(`${BASE_URL}/${id}`);
+    const data = await response.json();
+    console.log(data);
+    return data as Template;
+  }
