@@ -56,6 +56,38 @@ namespace Backend.Controllers
             return CreatedAtAction("GetTemplate", new { id = template.Id }, template);
         }
 
+        [HttpPut("{id}")]
+        public async Task<ActionResult<Template>> PutTemplate(int id, [FromBody] Template template)
+        {
+            if (id != template.Id)
+            {
+                return BadRequest();
+            }
+
+            var templateToUpdate = await _context.Templates
+            .Include(t => t.Weeks)
+            .ThenInclude(w => w.Events)
+            .AsNoTracking()
+            .FirstOrDefaultAsync(t => t.Id == id);
+
+            if (templateToUpdate == null)
+            {
+                return NotFound();
+            }
+
+            templateToUpdate = template;
+            templateToUpdate.Weeks = template.Weeks;
+
+            _context.Templates.Update(templateToUpdate);
+            await _context.SaveChangesAsync();
+
+            await _context.SaveChangesAsync();
+
+
+            return NoContent();
+        }
+
+
 
     }
 }
