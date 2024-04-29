@@ -68,6 +68,16 @@ function CreateTemplate({ setTemplates }: Props) {
 
     const queryClient = useQueryClient();
 
+    const mutation = useMutation({
+        mutationFn: (template: Template) => {
+          return saveCalendarTemplate(template);
+    
+        },
+        onSuccess: () => {
+          queryClient.invalidateQueries({queryKey:['templates']})
+        }
+      })
+
     const handleSubmit = (e: FormEvent<HTMLFormElement>) => {
         e.preventDefault();
         const { templateName } = e.target as typeof e.target & {
@@ -80,23 +90,9 @@ function CreateTemplate({ setTemplates }: Props) {
             weeks: weeks
         };
 
-        onSaveTemplate.mutate(template);
-
-        useMutation(saveCalendarTemplate,
-            {
-                onSuccess: () => {
-                    queryClient.invalidateQueries({ queryKey: ['templates'] })
-                },
-            });
+        mutation.mutate(template);
         navigate("/home")
     }
-
-    const onSaveTemplate = (template: Template) => {
-        saveCalendarTemplate(template)
-    }
-
-
-
 
     return (
         <section className="px-4">
