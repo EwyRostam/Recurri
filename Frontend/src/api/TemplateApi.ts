@@ -1,11 +1,11 @@
-import { Week } from "../components/createTemplate/CreateTemplate";
+import { Week } from "../components/Home/CreateTemplate/CreateTemplate";
 
 export type Template = {
     name: string;
     weeks: Week[];
 }
 
-const BASE_URL = "http://localhost:5236/api/Templates";
+const BASE_URL = "http://localhost:5131/api/Templates";
 
 export async function saveCalendarTemplate(eventTemplate: Template) {
      {
