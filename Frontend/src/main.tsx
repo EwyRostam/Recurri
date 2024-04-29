@@ -8,6 +8,7 @@ import Login from './components/Login/Login';
 import { GoogleOAuthProvider } from '@react-oauth/google';
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 import ViewTemplate from './components/Home/ViewTemplate/ViewTemplate';
+import EditTemplate from './components/Home/EditTemplate/EditTemplate';
 
 
 
@@ -39,6 +40,10 @@ const router = createBrowserRouter([
   {
     path: "home/createtemplate/*",
     element: <Home />,
+  },
+  {
+    path: "home/editTemplate/*",
+    element: <EditTemplate />,
   },
   {
     path: "home/template/*",

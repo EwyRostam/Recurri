@@ -18,11 +18,8 @@ export type Week = {
     events: CalendarEvent[];
 }
 
-type Props = {
-    setTemplates: Dispatch<SetStateAction<Template[]>>
-}
 
-function CreateTemplate({ setTemplates }: Props) {
+function CreateTemplate() {
     const navigate = useNavigate();
     const [weeks, setWeeks] = useState<Week[]>([{
         number: 1,

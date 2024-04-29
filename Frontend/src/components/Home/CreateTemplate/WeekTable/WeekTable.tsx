@@ -25,7 +25,7 @@ function WeekTable({weeks, handleAddEvent, setWeeks}: Props) {
                     <thead>
                         <tr>
                             <th>Week</th>
-                            <th><input type="number" onChange={(e)=>handleInputChange(e,index)} className="input input-bordered w-full input-sm max-w-xs" placeholder="Week number" /></th>
+                            <th><input type="number" value={week.number} onChange={(e)=>handleInputChange(e,index)} className="input input-bordered w-full input-sm max-w-xs" placeholder="Week number" /></th>
                             <th><button type="button" className="btn btn-sm" onClick={()=>handleAddEvent(index)}> + Add Event</button></th>
                         </tr>
                         <tr>
@@ -37,7 +37,7 @@ function WeekTable({weeks, handleAddEvent, setWeeks}: Props) {
                         </tr>
                     </thead>
                     <tbody>
-                        {week.events.map((_,eventIndex)=> <CalendarEvent key={"Week_"+index+"_Event_"+eventIndex} setWeeks={setWeeks} weeks={weeks} weekIndex={index} index={eventIndex}/>)}
+                        {week.events.map((event,eventIndex)=> <CalendarEvent key={"Week_"+index+"_Event_"+eventIndex} setWeeks={setWeeks} weeks={weeks} weekIndex={index} index={eventIndex} event={event}/>)}
                     </tbody>
                 </table>
                 )
