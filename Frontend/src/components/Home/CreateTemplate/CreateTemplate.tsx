@@ -7,7 +7,7 @@ import { saveCalendarTemplate } from "../../../api/TemplateApi";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 
 export type Template = {
-    id?: number;
+    id?: string;
     userEmail: string;
     name: string;
     weeks: Week[];

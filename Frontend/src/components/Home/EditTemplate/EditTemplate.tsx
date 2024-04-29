@@ -85,7 +85,8 @@ function EditTemplate() {
         const template: Template = {
             userEmail: sessionStorage.getItem("email")!,
             name: name.value,
-            weeks: weeks
+            weeks: weeks,
+            id: pathArray[pathArray.length - 1]
         };
         console.log(template)
         mutation.mutate(template);

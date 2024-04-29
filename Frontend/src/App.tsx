@@ -15,6 +15,10 @@ const LOGIN_URL = `https://accounts.google.com/o/oauth2/v2/auth?scope=https://ww
 function App() {
   const [profile, setProfile] = useState<User>();
 
+  if (profile) {
+    sessionStorage.setItem("email", profile!.email);
+  }
+
   if (location.hash) {
     const params = new URLSearchParams(location.hash);
     const accessToken = params.get('access_token');
@@ -24,7 +28,7 @@ function App() {
   };
 
 
-  const { data, isLoading} = useQuery({
+  const { data, isLoading } = useQuery({
     queryKey: ["user"],
     queryFn: getUser
   })
@@ -72,13 +76,13 @@ function App() {
             <button onClick={logOut}>Log out</button>
           </div>
         ) : (
-          <Login/>
+          <Login />
         )}
       </div>
 
-      <Home/>
+      <Home />
 
-      <Overview/>
+      <Overview />
     </>
   )
 
