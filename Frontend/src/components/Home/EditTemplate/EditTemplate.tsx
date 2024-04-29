@@ -91,7 +91,7 @@ function EditTemplate() {
         };
         console.log(template)
         mutation.mutate(template);
-
+        navigate("/home")
     }
 
     if (isLoading) {
