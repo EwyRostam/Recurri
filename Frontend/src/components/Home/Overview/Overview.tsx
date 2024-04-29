@@ -1,17 +1,18 @@
 import { useQuery } from "@tanstack/react-query";
 import { getAllTemplates } from "../../../api/TemplateApi";
+import { Link } from "react-router-dom";
 
 function Overview() {
 
-    const {data, isLoading, isError} = useQuery({
+    const { data, isLoading, isError } = useQuery({
         queryKey: ['templates'],
         queryFn: getAllTemplates
     });
 
     return (
         <>
-        {isLoading && <p>Loading...</p>}
-        {isError && <p>An error occured</p>}
+            {isLoading && <p>Loading...</p>}
+            {isError && <p>An error occured</p>}
             <section className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 px-4">
 
                 <div className="border border-black pb-[100%] relative">
@@ -23,14 +24,15 @@ function Overview() {
                     </div>
                 </div>
 
-                
-            {data && data.map( template =>
-                <div key={template.name} className="border border-black pb-[100%] relative">
-                <div className="absolute inset-0 flex items-center justify-center flex-col gap-4">
-                    {template.name}
-                </div>
-            </div>
-            )}
+
+                {data && data.map(template =>
+
+                    <Link to={`/home/template/${template.id}`} key={template.name} className="border border-black pb-[100%] relative">
+                        <div className="absolute inset-0 flex items-center justify-center flex-col gap-4">
+                            {template.name}
+                        </div>
+                    </Link>
+                )}
 
             </section>
 

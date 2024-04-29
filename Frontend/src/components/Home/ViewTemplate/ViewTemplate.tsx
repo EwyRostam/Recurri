@@ -1,15 +1,19 @@
 import { Link, useLocation } from "react-router-dom";
 import ViewWeek from "./components/ViewWeek";
 import { Template } from "../CreateTemplate/CreateTemplate";
+import { useQuery } from "@tanstack/react-query";
 
-type Props = {
-    template: Template
-}
 
-function ViewTemplate({template}: Props) {
+
+function ViewTemplate() {
     const location = useLocation();
     const { pathname } = location;
     const pathArray = pathname.split("/")
+
+    const { data, isLoading, isError } = useQuery({
+        queryKey: ['templates'],
+        queryFn: getAllTemplates
+    });
 
     return (
 
