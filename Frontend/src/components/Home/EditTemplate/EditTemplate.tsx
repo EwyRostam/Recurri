@@ -102,7 +102,7 @@ function EditTemplate() {
         <section className="px-4">
 
             <form action="" onSubmit={handleSubmit} className="flex flex-col gap-4">
-                <input type="text" name="name" className="input input-bordered w-full input-sm max-w-xs" value={template!.name} placeholder="Template name" />
+                <input type="text" name="name" className="input input-bordered w-full input-sm max-w-xs" value={template!.name} />
                 <button type="button" onClick={handleAddWeek} className="btn btn-sm max-w-48">+ Add Week</button>
                 <WeekTable weeks={template!.weeks} handleAddEvent={handleAddEvent} setWeeks={setWeeks} CustomRef={CustomRef} />
                 <input type="submit" className="btn btn-sm mt-4 max-w-48" value="Edit Template" />
