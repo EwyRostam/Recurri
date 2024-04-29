@@ -87,6 +87,24 @@ namespace Backend.Controllers
             return NoContent();
         }
 
+        [HttpDelete("{id}")]
+        public async Task<IActionResult> DeleteTemplate(int id)
+        {
+            var template = await _context.Templates
+            .Include(t => t.Weeks)
+            .ThenInclude(w => w.Events)
+            .FirstOrDefaultAsync(template => template.Id == id);
+
+            if (template == null)
+            {
+                return NotFound();
+            }
+
+            _context.Templates.Remove(template);
+            await _context.SaveChangesAsync();
+
+            return NoContent();
+        }
 
 
     }
