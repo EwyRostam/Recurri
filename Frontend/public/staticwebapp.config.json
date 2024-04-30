@@ -1,51 +1,9 @@
 {
-    
-  
-  "routes": [
-      {
-        "route": "/",
-        "serve": "/index.html"
-      },
-      {
-        "route": "/about",
-        "serve": "/index.html"
-      },
-      {
-        "route": "/aboutus",
-        "serve": "/index.html"
-      },
-      {
-        "route": "/home",
-        "serve": "/index.html"
-      },
-      {
-        "route": "/home/createtemplate",
-        "serve": "/index.html"
-      },
-      {
-        "route": "/home/createtemplate/*",
-        "serve": "/index.html"
-      },
-      {
-        "route": "/home/editTemplate/*",
-        "serve": "/index.html"
-      },
-      {
-        "route": "/home/template/*",
-        "serve": "/index.html"
-      },
-      {
-        "route": "/home/*",
-        "serve": "/index.html"
-      },
-      {
-        "route": "/login",
-        "serve": "/index.html"
-      }
-    ],
-    "navigationFallback": {
-      "rewrite": "/index.html",
-      "exclude": ["/images/*", "/styles/*"]
-    }
+  "navigationFallback": {
+     "rewrite": "index.html",
+     "exclude": ["/static/media/*.{png,jpg,jpeg,gif,bmp}",   "/static/css/*"]
+  },
+  "mimeTypes": {
+      ".json": "text/json"
   }
-  
+}
