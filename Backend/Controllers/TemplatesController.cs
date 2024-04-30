@@ -55,7 +55,7 @@ namespace Backend.Controllers
 
             return CreatedAtAction("GetTemplate", new { id = template.Id }, template);
         }
-        
+
         [HttpPut("{id}")]
         public async Task<ActionResult<Template>> PutTemplate(int id, [FromBody] Template template)
         {
@@ -63,8 +63,6 @@ namespace Backend.Controllers
             {
                 return BadRequest();
             }
-
-
 
             var templateToUpdate = await _context.Templates
             .Include(t => t.Weeks)
