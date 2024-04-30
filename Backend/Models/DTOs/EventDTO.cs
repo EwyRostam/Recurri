@@ -1,16 +1,13 @@
-namespace Backend.Models
+namespace Backend.Models.DTOs
 {
-    public class Event
+    public class EventDTO
     {
-        public int Id { get; set; }
         public required string Name { get; set; }
         public string? Description { get; set; }
         public int Day { get; set; }
         public string? StartTime { get; set; }
         public string? EndTime { get; set; }
         public string? Recurrence { get; set; }
-        public int WeekId { get; set; }
-        public required Week Week { get; set; }
-
+        public int WeekNumber {get; set;}
     }
 }

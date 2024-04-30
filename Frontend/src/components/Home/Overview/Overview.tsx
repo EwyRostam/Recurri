@@ -28,12 +28,14 @@ function Overview() {
 
 
                 {data && data.map(template =>
-
+                <>
+                    console.log(template);
                     <Link to={`/home/template/${template.id}`} key={template.name} className="border border-black pb-[100%] relative">
                         <div className="absolute inset-0 flex items-center justify-center flex-col gap-4">
                             {template.name}
                         </div>
                     </Link>
+                    </>
                 )}
 
             </section>

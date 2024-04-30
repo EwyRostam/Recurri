@@ -81,8 +81,6 @@ namespace Backend.Controllers
             _context.Templates.Update(templateToUpdate);
             await _context.SaveChangesAsync();
 
-            await _context.SaveChangesAsync();
-
 
             return NoContent();
         }
