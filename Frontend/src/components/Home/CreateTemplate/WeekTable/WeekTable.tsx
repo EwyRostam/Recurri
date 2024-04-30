@@ -37,7 +37,7 @@ function WeekTable({weeks, handleAddEvent, setWeeks}: Props) {
                         </tr>
                     </thead>
                     <tbody>
-                        {week.events.map((event,eventIndex)=> <CalendarEvent key={"Week_"+index+"_Event_"+eventIndex} setWeeks={setWeeks} weeks={weeks} weekIndex={index} index={eventIndex} event={event}/>)}
+                        {week.events.map((event,eventIndex)=> <CalendarEvent key={"Week_"+index+"_Event_"+eventIndex} setWeeks={setWeeks} weeks={weeks} weekIndex={index -1} index={eventIndex} event={event}/>)}
                     </tbody>
                 </table>
                 )

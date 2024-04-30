@@ -1,5 +1,5 @@
 import { Link, useLocation } from "react-router-dom"
-import CreateTemplate, { Template } from "./CreateTemplate/CreateTemplate"
+import CreateTemplate from "./CreateTemplate/CreateTemplate"
 import Overview from "./Overview/Overview"
 import { useEffect, useState } from "react";
 import { deleteCookie, getCookie, setCookie } from "../../helpers/CookieHelpers";
@@ -15,7 +15,6 @@ export type User = {
 function Home() {
   const location = useLocation();
   const { pathname } = location;
-  const [templates, setTemplates] = useState<Template[]>([])
   const pathArray = pathname.split("/")
   const [profile, setProfile] = useState<User>();
 

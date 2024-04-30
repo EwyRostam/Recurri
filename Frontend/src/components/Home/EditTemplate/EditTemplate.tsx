@@ -84,9 +84,6 @@ function EditTemplate() {
 
     const handleSubmit = (e: FormEvent<HTMLFormElement>) => {
         e.preventDefault();
-        // const { name } = e.target as typeof e.target & {
-        //     name: { value: string };
-        // };
 
         const template: Template = {
             userEmail: getCookie("email")!,
