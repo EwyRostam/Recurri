@@ -10,25 +10,15 @@ import { getCookie } from "../../../helpers/CookieHelpers";
 
 function EditTemplate() {
     const navigate = useNavigate();
-    const [name, setName] = useState<string>("");
 
-    const [weeks, setWeeks] = useState<Week[]>([{
-        number: 1,
-        events: [{
-            name: "",
-            description: "",
-            day: 1,
-            startTime: "",
-            endTime: "",
-            recurrence: ""
-        }]
-    }]);
+    const [name, setName] = useState<string>("");
+    const [weeks, setWeeks] = useState<Week[]>([]);
 
     const CustomRef = useRef<HTMLDialogElement>(null)
 
     const handleAddWeek = () => {
         const newWeek = {
-            number: 1, events: [{
+            number: 0, events: [{
                 name: "",
                 description: "",
                 day: 0,
@@ -70,6 +60,7 @@ function EditTemplate() {
     useEffect(() => {
         if (template) {
             setName(template.name);
+            setWeeks(template.weeks)
         }
     }, [])
 
@@ -91,7 +82,6 @@ function EditTemplate() {
             weeks: weeks,
             id: pathArray[pathArray.length - 1]
         };
-        console.log(template)
         mutation.mutate(template);
         navigate("/home")
     }
@@ -112,7 +102,7 @@ function EditTemplate() {
             <form action="" onSubmit={handleSubmit} className="flex flex-col gap-4">
                 <input type="text" name="name" className="input input-bordered w-full input-sm max-w-xs" value={name} onChange={handleChange} />
                 <button type="button" onClick={handleAddWeek} className="btn btn-sm max-w-48">+ Add Week</button>
-                <WeekTable weeks={template!.weeks} handleAddEvent={handleAddEvent} setWeeks={setWeeks} CustomRef={CustomRef} />
+                <WeekTable weeks={weeks} handleAddEvent={handleAddEvent} setWeeks={setWeeks} CustomRef={CustomRef} />
                 <input type="submit" className="btn btn-sm mt-4 max-w-48" value="Edit Template" />
                 <button className="btn btn-sm max-w-48" onClick={() => convertToGoogle(weeks, new Date())}> Convert To google </button>
             </form>

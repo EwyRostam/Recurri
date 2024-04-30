@@ -40,22 +40,11 @@ function Home() {
 
   }, [])
 
-
-  
   return (
 
-    <div>
-      <br />
-      <br />
-      {profile ? (
+
+
         <div>
-          <img src={profile.picture} alt="user image" />
-          <h3>User Logged in</h3>
-          <p>Name: {profile.name}</p>
-          <p>Email Address: {profile.email}</p>
-          <br />
-          <br />
-          <button onClick={logOut}>Log out</button>
           <div className="drawer lg:drawer-open">
             <input id="my-drawer" type="checkbox" className="drawer-toggle" />
             <div className="drawer-content flex flex-col">
@@ -71,7 +60,6 @@ function Home() {
                     return <li key={name + index}><Link to={path}>{name}</Link></li>
 
                   })}
-
                 </ul>
               </div>
 
@@ -91,21 +79,7 @@ function Home() {
           </div>
 
         </div>
-      ) : (
-        <div>
-          <GoogleLogin
-            onSuccess={credentialResponse => {
-              document.cookie = `google_login_key = ${credentialResponse.credential}`
-              console.log(jwtDecode(credentialResponse.credential as string));
-              setProfile(jwtDecode(credentialResponse.credential as string));
-            }}
-            onError={() => {
-              console.log('Login Failed');
-            }}
-          />
-        </div>
-      )}
-    </div>
+
 
 
 

@@ -10,7 +10,6 @@ type Props = {
 }
 
 function WeekTable({weeks, handleAddEvent, setWeeks}: Props) {
-
     const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>, index:number) => {
         const { value } = e.target;
         const updatedWeeks = [...weeks];
@@ -20,6 +19,7 @@ function WeekTable({weeks, handleAddEvent, setWeeks}: Props) {
     return (
         <>
             {weeks.map((week, index) => {
+                console.log("index in map", index)
                 return(
                     <table className="table table-sm" key={"week_"+index}>
                     <thead>
@@ -37,7 +37,7 @@ function WeekTable({weeks, handleAddEvent, setWeeks}: Props) {
                         </tr>
                     </thead>
                     <tbody>
-                        {week.events.map((event,eventIndex)=> <CalendarEvent key={"Week_"+index+"_Event_"+eventIndex} setWeeks={setWeeks} weeks={weeks} weekIndex={index -1} index={eventIndex} event={event}/>)}
+                        {week.events.map((event,eventIndex)=> <CalendarEvent key={"Week_"+index+"_Event_"+eventIndex} setWeeks={setWeeks} weeks={weeks} weekIndex={index} index={eventIndex} event={event}/>)}
                     </tbody>
                 </table>
                 )
