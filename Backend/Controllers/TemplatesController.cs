@@ -55,7 +55,7 @@ namespace Backend.Controllers
 
             return CreatedAtAction("GetTemplate", new { id = template.Id }, template);
         }
-
+        
         [HttpPut("{id}")]
         public async Task<ActionResult<Template>> PutTemplate(int id, [FromBody] Template template)
         {
@@ -63,6 +63,8 @@ namespace Backend.Controllers
             {
                 return BadRequest();
             }
+
+
 
             var templateToUpdate = await _context.Templates
             .Include(t => t.Weeks)
@@ -73,6 +75,17 @@ namespace Backend.Controllers
             if (templateToUpdate == null)
             {
                 return NotFound();
+            }
+
+            var weeks = await _context.Weeks.Include(w => w.Events).AsNoTracking().ToListAsync();
+
+            var deleteList = templateToUpdate.Weeks.Where(week => !template.Weeks.Any(putWeek => week.Id == putWeek.Id)).ToList();
+
+            foreach (var week in deleteList)
+            {
+                _context.Weeks.Remove(week);
+                Console.WriteLine(week.Id);
+
             }
 
             templateToUpdate = template;
