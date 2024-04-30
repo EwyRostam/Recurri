@@ -2,7 +2,7 @@ import { Template} from "../components/Home/CreateTemplate/CreateTemplate";
 import { getCookie } from "../helpers/CookieHelpers";
 
 
-const BASE_URL = "http://localhost:5131/api/Templates";
+const BASE_URL = "https://recurri.azurewebsites.net/api/Templates";
 
 
 export async function editTemplate(template: Template) {
