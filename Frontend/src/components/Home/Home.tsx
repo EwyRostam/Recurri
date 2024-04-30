@@ -2,7 +2,7 @@ import { Link, useLocation } from "react-router-dom"
 import CreateTemplate from "./CreateTemplate/CreateTemplate"
 import Overview from "./Overview/Overview"
 import { useEffect, useState } from "react";
-import { deleteCookie, getCookie, setCookie } from "../../helpers/CookieHelpers";
+import { getCookie, setCookie } from "../../helpers/CookieHelpers";
 import { GoogleLogin } from "@react-oauth/google";
 import { jwtDecode } from 'jwt-decode';
 
@@ -23,12 +23,12 @@ function Home() {
   }
 
 
-  const logOut = () => {
-    setProfile(undefined);
-    deleteCookie("access_token");
-    deleteCookie("google_login_key");
-    window.location.reload();
-  };
+  // const logOut = () => {
+  //   setProfile(undefined);
+  //   deleteCookie("access_token");
+  //   deleteCookie("google_login_key");
+  //   window.location.reload();
+  // };
 
   useEffect(() => {
     const googleCookie = getCookie("google_login_key");
