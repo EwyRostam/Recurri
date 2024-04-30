@@ -69,6 +69,7 @@ function ViewTemplate() {
                     <button className="btn btn-sm py-1 max-w-xs btn-success text-white">Apply Template </button>
                     <button onClick={() => deleteTemplateById()} className="btn btn-sm py-1 max-w-xs btn-error text-white">Delete Template </button>
                     <button className="btn btn-sm py-1 max-w-xs btn-info text-white"> Preview Template </button>
+                    <Link to={`/home/editTemplate/${template!.id}`} className="btn btn-sm py-1 max-w-xs btn-info text-white"> Edit Template </Link>
                 </div>
                 </section>
             </div>
