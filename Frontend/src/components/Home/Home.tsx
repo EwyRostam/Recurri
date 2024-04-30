@@ -22,7 +22,6 @@ function Home() {
     setCookie("email", profile.email, 1);
   }
 
-
   // const logOut = () => {
   //   setProfile(undefined);
   //   deleteCookie("access_token");
