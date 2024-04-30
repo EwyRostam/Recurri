@@ -19,7 +19,6 @@ function WeekTable({weeks, handleAddEvent, setWeeks}: Props) {
     return (
         <>
             {weeks.map((week, index) => {
-                console.log("index in map", index)
                 return(
                     <table className="table table-sm" key={"week_"+index}>
                     <thead>

@@ -68,8 +68,9 @@ function EditTemplate() {
         mutationFn: (template: Template) => {
             return editTemplate(template);
         },
-        onSuccess: () => {
+        onSuccess: ()=> {
             queryClient.invalidateQueries({ queryKey: ['templates'] })
+            
         }
     })
 

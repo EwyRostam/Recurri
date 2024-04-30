@@ -5,6 +5,7 @@ import { convertToGoogle } from "./helpers";
 import { useNavigate } from "react-router-dom";
 import { saveCalendarTemplate } from "../../../api/TemplateApi";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
+import { getCookie } from "../../../helpers/CookieHelpers";
 
 export type Template = {
     id?: string;
@@ -83,7 +84,7 @@ function CreateTemplate() {
         };
 
         const template: Template = {
-            userEmail: sessionStorage.getItem("email")!,
+            userEmail: getCookie("email")!,
             name: templateName.value,
             weeks: weeks
         };

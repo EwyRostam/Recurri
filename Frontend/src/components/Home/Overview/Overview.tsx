@@ -14,9 +14,7 @@ function Overview() {
     
     return (
         <>
-            
             <section className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 px-4">
-
                 <div className="border border-black pb-[100%] relative">
                     <div className="absolute inset-0 flex items-center justify-center flex-col gap-4">
                         <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth="1.5" stroke="currentColor" className="w-1/4 h-1/4">
@@ -27,15 +25,14 @@ function Overview() {
                 </div>
 
 
-                {data && data.map(template =>
-                <>
-                    console.log(template);
-                    <Link to={`/home/template/${template.id}`} key={template.name} className="border border-black pb-[100%] relative">
+                {data && data.map((template, index) =>
+
+                    <Link to={`/home/template/${template.id}`} key={template.name + index} className="border border-black pb-[100%] relative">
                         <div className="absolute inset-0 flex items-center justify-center flex-col gap-4">
                             {template.name}
                         </div>
                     </Link>
-                    </>
+
                 )}
 
             </section>
@@ -48,7 +45,6 @@ function Overview() {
                     <input className="join-item btn btn-square" type="radio" name="options" aria-label="4" />
                 </div>
             </div>
-
         </>
     )
 }

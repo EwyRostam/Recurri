@@ -15,9 +15,10 @@ export async function editTemplate(template: Template) {
     },
     body: JSON.stringify(template),
   });
-  const data = await response.json();
-  console.log(data);
-  return data;
+  if (!response.ok) {
+    throw new Error("Failed to edit template");
+  }
+
 }
 
 export async function saveCalendarTemplate(eventTemplate: Template) {
