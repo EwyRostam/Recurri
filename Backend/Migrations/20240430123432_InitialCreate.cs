@@ -31,7 +31,7 @@ namespace Backend.Migrations
                     Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
                     Number = table.Column<int>(type: "int", nullable: false),
-                    TemplateId = table.Column<int>(type: "int", nullable: false)
+                    TemplateId = table.Column<int>(type: "int", nullable: true)
                 },
                 constraints: table =>
                 {
@@ -40,8 +40,7 @@ namespace Backend.Migrations
                         name: "FK_Weeks_Templates_TemplateId",
                         column: x => x.TemplateId,
                         principalTable: "Templates",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
+                        principalColumn: "Id");
                 });
 
             migrationBuilder.CreateTable(
@@ -56,7 +55,7 @@ namespace Backend.Migrations
                     StartTime = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     EndTime = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     Recurrence = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    WeekId = table.Column<int>(type: "int", nullable: false)
+                    WeekId = table.Column<int>(type: "int", nullable: true)
                 },
                 constraints: table =>
                 {
@@ -65,8 +64,7 @@ namespace Backend.Migrations
                         name: "FK_Events_Weeks_WeekId",
                         column: x => x.WeekId,
                         principalTable: "Weeks",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
+                        principalColumn: "Id");
                 });
 
             migrationBuilder.CreateIndex(

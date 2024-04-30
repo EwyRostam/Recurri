@@ -9,8 +9,6 @@ namespace Backend.Models
         public string? StartTime { get; set; }
         public string? EndTime { get; set; }
         public string? Recurrence { get; set; }
-        public int WeekId { get; set; }
-        public required Week Week { get; set; }
 
     }
 }
