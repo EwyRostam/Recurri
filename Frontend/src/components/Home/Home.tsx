@@ -40,7 +40,7 @@ function Home() {
 
   console.log(getCookie("google_login_key"))
   return (
-    profile == undefined  ? 
+    getCookie("email") != null  ? 
     <div>
       <div className="drawer lg:drawer-open">
         <input id="my-drawer" type="checkbox" className="drawer-toggle" />
