@@ -17,10 +17,6 @@
         "serve": "/index.html"
       },
       {
-        "route": "/home/*",
-        "serve": "/index.html"
-      },
-      {
         "route": "/home/createtemplate",
         "serve": "/index.html"
       },
@@ -34,6 +30,10 @@
       },
       {
         "route": "/home/template/*",
+        "serve": "/index.html"
+      },
+      {
+        "route": "/home/*",
         "serve": "/index.html"
       },
       {
