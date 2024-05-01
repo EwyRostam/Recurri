@@ -65,6 +65,7 @@ function ViewTemplate() {
                 <section className="w-11/12 mx-auto">
                 <h1 className="pb-4">{template!.name}</h1>
                 {<ViewWeek weeks={template!.weeks} />}
+                <input type="text" name="startDatw" className="input input-bordered w-full input-sm max-w-xs"/>
                 <div className="pt-4 flex gap-4">
                     <button className="btn btn-sm py-1 max-w-xs btn-success text-white">Apply Template </button>
                     <button onClick={() => deleteTemplateById()} className="btn btn-sm py-1 max-w-xs btn-error text-white">Delete Template </button>
