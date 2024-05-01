@@ -38,7 +38,7 @@ function Home() {
 
   }, [])
 
-  console.log(getCookie("google_login_key"))
+
   return (
     getCookie("email") != null  ? 
     <div>
@@ -79,11 +79,10 @@ function Home() {
       <GoogleLogin
       onSuccess={credentialResponse => {
         document.cookie = `google_login_key = ${credentialResponse.credential}`
-        console.log(jwtDecode(credentialResponse.credential as string));
         setProfile(jwtDecode(credentialResponse.credential as string));
       }}
       onError={() => {
-        console.log('Login Failed');
+
       }}
     />
   )

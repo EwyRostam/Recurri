@@ -68,11 +68,12 @@ function EditTemplate() {
     const mutation = useMutation({
         mutationFn: (template: Template) => {
             return editTemplate(template);
+
         },
         onSuccess: () => {
             queryClient.invalidateQueries({ queryKey: ['templates'] })
-
-        }
+            navigate("/home")
+        },
     })
 
     const handleSubmit = (e: FormEvent<HTMLFormElement>) => {
@@ -85,7 +86,6 @@ function EditTemplate() {
             id: pathArray[pathArray.length - 1]
         };
         mutation.mutate(template);
-        navigate("/home")
     }
 
     const handleChange = (e: SyntheticEvent) => {

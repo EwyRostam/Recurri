@@ -5,6 +5,8 @@ import { deleteTemplate, getTemplateById } from "../../../api/TemplateApi";
 import { DatePicker } from "@mui/x-date-pickers";
 import ErrorMessage from "../../../helpers/ErrorMessage";
 import LoadingMessage from "../../../helpers/LoadingMessage";
+import { convertToGoogle } from "../CreateTemplate/helpers";
+import { useState } from "react";
 
 
 
@@ -13,7 +15,7 @@ function ViewTemplate() {
     const navigate = useNavigate();
     const { pathname } = location;
     const pathArray = pathname.split("/")
-
+    const [startDate, setStartDate] = useState<Date>(new Date());
 
 
     const { data: template, isLoading, isError } = useQuery({
@@ -41,6 +43,11 @@ function ViewTemplate() {
     }
 
 
+
+    function handleApply(): void {
+        let templates = template!.weeks
+        convertToGoogle(templates, startDate!)
+    }
 
     return (
 
@@ -72,9 +79,9 @@ function ViewTemplate() {
                         <section className="w-11/12 mx-auto">
                             <h1 className="pb-4">{template!.name}</h1>
                             {<ViewWeek weeks={template!.weeks} />}
-                            <DatePicker />
+                            <DatePicker value={startDate} onChange={(date) => setStartDate(date!) } />
                             <div className="pt-4 flex gap-4">
-                                <button className="btn btn-sm py-1 max-w-xs btn-success text-white">Apply Template </button>
+                                <button onClick={()=> handleApply()} className="btn btn-sm py-1 max-w-xs btn-success text-white">Apply Template </button>
                                 <button onClick={() => deleteTemplateById()} className="btn btn-sm py-1 max-w-xs btn-error text-white">Delete Template </button>
                                 <button className="btn btn-sm py-1 max-w-xs btn-info text-white"> Preview Template </button>
                                 <Link to={`/home/editTemplate/${template!.id}`} className="btn btn-sm py-1 max-w-xs btn-info text-white"> Edit Template </Link>

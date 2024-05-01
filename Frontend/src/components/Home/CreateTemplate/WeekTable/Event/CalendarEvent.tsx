@@ -30,7 +30,6 @@ export type GoogleEvent = {
         dateTime: string,
         timeZone: string
     },
-    recurrence: string[],
     extendedProperties: {
         shared: {
             template: string
