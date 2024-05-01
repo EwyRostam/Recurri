@@ -1,6 +1,9 @@
 import { startOfDay, addDays, addHours, addMinutes } from "date-fns";
 import { Week } from "./CreateTemplate";
 import { GoogleEvent } from "./WeekTable/Event/CalendarEvent";
+import { createCalendarTemplate } from "../../../api/CalendarApi";
+import { useGoogleLogin } from "@react-oauth/google";
+import { setCookie } from "../../../helpers/CookieHelpers";
 
 export function converToDate(date:Date, weekNumber :number, eventTime:string, dayNumber:number ){
 
@@ -36,7 +39,6 @@ export const convertToGoogle = (weeks:Week[], templateStart:Date ) => {
                     dateTime: endDate.toISOString(),
                     timeZone: "Europe/Stockholm"
                 },
-                recurrence: [event.recurrence],
                 extendedProperties: {
                     shared: {
                         template: "sprint"
@@ -47,5 +49,6 @@ export const convertToGoogle = (weeks:Week[], templateStart:Date ) => {
             googleEvents.push(googleEvent);
         });
     });
-
+    console.log(googleEvents)
+    createCalendarTemplate(googleEvents);
 }

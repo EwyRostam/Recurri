@@ -3,10 +3,13 @@ import ViewWeek from "./components/ViewWeek";
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 import { deleteTemplate, getTemplateById } from "../../../api/TemplateApi";
 import { DatePicker } from "@mui/x-date-pickers";
+import { useState } from "react";
+import { convertToGoogle } from "../CreateTemplate/helpers";
 
 
 
 function ViewTemplate() {
+    const [startDate, setStartDate] = useState<Date>();
     const location = useLocation();
     const navigate = useNavigate();
     const { pathname } = location;
@@ -43,6 +46,11 @@ function ViewTemplate() {
     }
     if (isError) return <p>An error occured</p>
 
+
+    const handleApply = () =>{
+        let templates = template!.weeks
+        convertToGoogle(templates, startDate!)
+    } 
     return (
 
         <div className="drawer lg:drawer-open">
@@ -66,9 +74,12 @@ function ViewTemplate() {
                 <section className="w-11/12 mx-auto">
                 <h1 className="pb-4">{template!.name}</h1>
                 {<ViewWeek weeks={template!.weeks} />}
-                <DatePicker />
+                <DatePicker 
+                label="Controlled picker"
+                value={startDate}
+                onChange={(e) => setStartDate(e!)}/>
                 <div className="pt-4 flex gap-4">
-                    <button className="btn btn-sm py-1 max-w-xs btn-success text-white">Apply Template </button>
+                    <button onClick={() => handleApply()} className="btn btn-sm py-1 max-w-xs btn-success text-white">Apply Template </button>
                     <button onClick={() => deleteTemplateById()} className="btn btn-sm py-1 max-w-xs btn-error text-white">Delete Template </button>
                     <button className="btn btn-sm py-1 max-w-xs btn-info text-white"> Preview Template </button>
                     <Link to={`/home/editTemplate/${template!.id}`} className="btn btn-sm py-1 max-w-xs btn-info text-white"> Edit Template </Link>

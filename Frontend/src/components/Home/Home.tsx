@@ -3,7 +3,7 @@ import CreateTemplate from "./CreateTemplate/CreateTemplate"
 import Overview from "./Overview/Overview"
 import { useEffect, useState } from "react";
 import { getCookie, setCookie } from "../../helpers/CookieHelpers";
-import { GoogleLogin } from "@react-oauth/google";
+import { GoogleLogin, useGoogleLogin } from "@react-oauth/google";
 import { jwtDecode } from 'jwt-decode';
 
 export type User = {
@@ -77,16 +77,7 @@ function Home() {
 
     </div>
     :
-      <GoogleLogin
-      onSuccess={credentialResponse => {
-        document.cookie = `google_login_key = ${credentialResponse.credential}`
-        console.log(jwtDecode(credentialResponse.credential as string));
-        setProfile(jwtDecode(credentialResponse.credential as string));
-      }}
-      onError={() => {
-        console.log('Login Failed');
-      }}
-    />
+    <p>lol</p>
   )
 }
 
