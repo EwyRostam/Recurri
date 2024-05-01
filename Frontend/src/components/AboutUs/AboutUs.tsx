@@ -1,4 +1,6 @@
 import { Link, useLocation } from "react-router-dom";
+import calendar from "./calendar.png";
+import "./AboutUs.css";
 
 function AboutUs() {
     const location = useLocation();
@@ -39,6 +41,8 @@ function AboutUs() {
                     <p className="max-w-lg">
                         Say goodbye to the time-consuming task of event planning and hello to effortless scheduling with <span className="font-bold">Recurri </span>!
                     </p>
+                    <br />
+                    <img src={calendar} alt="calendar" className="img-container" />
                 </div>
 
 
