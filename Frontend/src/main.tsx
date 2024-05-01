@@ -9,6 +9,8 @@ import { GoogleOAuthProvider } from '@react-oauth/google';
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 import ViewTemplate from './components/Home/ViewTemplate/ViewTemplate';
 import EditTemplate from './components/Home/EditTemplate/EditTemplate';
+import { LocalizationProvider } from '@mui/x-date-pickers';
+import { AdapterDateFns } from '@mui/x-date-pickers/AdapterDateFnsV3'
 
 
 
@@ -61,7 +63,9 @@ ReactDOM.createRoot(document.getElementById('root')!).render(
   <GoogleOAuthProvider clientId='1021052820543-fm1vrkkpkq1idpvckttevn0ir9d9qdc2.apps.googleusercontent.com'>
     <React.StrictMode>
       <QueryClientProvider client={queryClient}>
+        <LocalizationProvider dateAdapter={AdapterDateFns}>
         <RouterProvider router={router} />
+        </LocalizationProvider>
       </QueryClientProvider>
     </React.StrictMode>
   </GoogleOAuthProvider>
