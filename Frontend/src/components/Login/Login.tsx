@@ -1,6 +1,8 @@
 import { useGoogleLogin } from "@react-oauth/google";
 import { useNavigate } from "react-router-dom"
 import { setCookie } from "../../helpers/CookieHelpers";
+import Logo from "./finalLogo.png"
+import './login.css'
 
 function Login() {
     const navigate = useNavigate()
@@ -16,6 +18,7 @@ function Login() {
       
     return (
         <section className="w-full h-screen flex justify-center items-center flex-col gap-4">
+            <img src={Logo} alt="logo" className="logo-picture" />
             <h1 className="text-2xl">Recurri</h1>
             <p> Create Calendar Templates for recurring events!</p>
             <button type="button" onClick={()=> login()} className="text-white w-full  bg-[#4285F4] hover:bg-[#4285F4]/90 focus:ring-4 focus:outline-none focus:ring-[#4285F4]/50 font-medium rounded-lg text-sm px-5 py-2.5 text-center inline-flex items-center justify-between mr-2 mb-2 max-w-sm">
