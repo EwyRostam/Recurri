@@ -1,12 +1,13 @@
 import { FormEvent, SyntheticEvent, useEffect, useRef, useState } from "react";
-import { useLocation, useNavigate } from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 import { Template, Week } from "../CreateTemplate/CreateTemplate";
 import { CalendarEvent } from "../CreateTemplate/WeekTable/Event/CalendarEvent";
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 import { editTemplate, getTemplateById } from "../../../api/TemplateApi";
-import { convertToGoogle } from "../CreateTemplate/helpers";
 import WeekTable from "../CreateTemplate/WeekTable/WeekTable";
 import { getCookie } from "../../../helpers/CookieHelpers";
+import LoadingMessage from "../../../helpers/LoadingMessage";
+import ErrorMessage from "../../../helpers/ErrorMessage";
 
 function EditTemplate() {
     const navigate = useNavigate();
@@ -68,9 +69,9 @@ function EditTemplate() {
         mutationFn: (template: Template) => {
             return editTemplate(template);
         },
-        onSuccess: ()=> {
+        onSuccess: () => {
             queryClient.invalidateQueries({ queryKey: ['templates'] })
-            
+
         }
     })
 
@@ -92,22 +93,55 @@ function EditTemplate() {
         setName((e.target as HTMLInputElement).value);
     }
 
-    if (isLoading) {
-        return (<p>Loading...</p>)
-    }
-    if (isError) return <p>An error occured</p>
-
     return (
-        <section className="px-4">
+        <div className="drawer lg:drawer-open">
+            <input id="my-drawer" type="checkbox" className="drawer-toggle" />
+            <div className="drawer-content flex flex-col">
+                <label htmlFor="my-drawer" className="btn btn-primary drawer-button lg:hidden h-8" >Open drawer</label>
 
-            <form action="" onSubmit={handleSubmit} className="flex flex-col gap-4">
-                <input type="text" name="name" className="input input-bordered w-full input-sm max-w-xs" value={name} onChange={handleChange} />
-                <button type="button" onClick={handleAddWeek} className="btn btn-sm max-w-48">+ Add Week</button>
-                <WeekTable weeks={weeks} handleAddEvent={handleAddEvent} setWeeks={setWeeks} CustomRef={CustomRef} />
-                <input type="submit" className="btn btn-sm mt-4 max-w-48" value="Edit Template" />
-                <button className="btn btn-sm max-w-48" onClick={() => convertToGoogle(weeks, new Date())}> Convert To google </button>
-            </form>
-        </section>
+                <div className="pl-4 text-sm breadcrumbs h-12">
+                    <ul>
+                        {pathArray.length > 2 && pathArray.slice(1).map((name, index) => {
+                            const path = `/${pathArray.slice(1, index + 2).join('/')}`;
+                            if (index == pathArray.length - 1) {
+                                return <li key={name + index}>{name}</li>
+                            }
+                            return <li key={name + index}><Link to={path}>{name}</Link></li>
+
+                        })}
+
+                    </ul>
+                </div>
+
+                {isLoading ?
+                    <LoadingMessage />
+                    :
+                    isError ?
+                        <ErrorMessage />
+                        :
+                        <section className="px-4">
+
+                            <form action="" onSubmit={handleSubmit} className="flex flex-col gap-4">
+                                <input type="text" name="name" className="input input-bordered w-full input-sm max-w-xs" value={name} onChange={handleChange} />
+                                <button type="button" onClick={handleAddWeek} className="btn btn-sm max-w-48">+ Add Week</button>
+                                <WeekTable weeks={weeks} handleAddEvent={handleAddEvent} setWeeks={setWeeks} CustomRef={CustomRef} />
+                                <input type="submit" className="btn btn-sm mt-4 max-w-48" value="Edit Template" />
+                            </form>
+                        </section>
+                }
+
+            </div>
+            <div className="drawer-side">
+                <label htmlFor="my-drawer" aria-label="close sidebar" className="drawer-overlay"></label>
+                <ul className="menu p-4 w-80 min-h-full bg-base-200 text-base-content ">
+                    {/* Sidebar content here */}
+                    <li><h1 className="text-2xl">Recurri</h1></li>
+                    <li><Link to={"/home"}>Home</Link></li>
+                    <li><Link to={"/home/createtemplate"}>Create template</Link></li>
+                    <li><Link to={"/aboutus"}>About us</Link></li>
+                </ul>
+            </div>
+        </div>
     )
 }
 

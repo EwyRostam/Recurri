@@ -25,7 +25,7 @@ function WeekTable({weeks, handleAddEvent, setWeeks}: Props) {
                         <tr>
                             <th>Week</th>
                             <th><input type="number" value={week.number} onChange={(e)=>handleInputChange(e,index)} className="input input-bordered w-full input-sm max-w-xs" placeholder="Week number" /></th>
-                            <th><button type="button" className="btn btn-sm" onClick={()=>handleAddEvent(index)}> + Add Event</button></th>
+                            <th><button type="button" className="btn btn-sm btn-primary" onClick={()=>handleAddEvent(index)}> + Add Event</button></th>
                         </tr>
                         <tr>
                             <th>Summary</th>

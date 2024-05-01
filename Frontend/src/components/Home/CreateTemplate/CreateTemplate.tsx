@@ -1,7 +1,6 @@
 import { FormEvent, useRef, useState } from "react";
 import WeekTable from "./WeekTable/WeekTable"
 import { CalendarEvent } from "./WeekTable/Event/CalendarEvent";
-import { convertToGoogle } from "./helpers";
 import { useNavigate } from "react-router-dom";
 import { saveCalendarTemplate } from "../../../api/TemplateApi";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
@@ -98,59 +97,10 @@ function CreateTemplate() {
 
             <form action="" onSubmit={handleSubmit} className="flex flex-col gap-4">
                 <input type="text" name="templateName" className="input input-bordered w-full input-sm max-w-xs" placeholder="Template name" />
-                <button type="button" onClick={handleAddWeek} className="btn btn-sm max-w-48">+ Add Week</button>
+                <button type="button" onClick={handleAddWeek} className="btn btn-sm max-w-48 btn-primary">+ Add Week</button>
                 <WeekTable weeks={weeks} handleAddEvent={handleAddEvent} setWeeks={setWeeks} CustomRef={CustomRef} />
-                <input type="submit" className="btn btn-sm mt-4 max-w-48" value="Create Template" />
-                <button className="btn btn-sm max-w-48" onClick={() => convertToGoogle(weeks, new Date())}> Convert To google </button>
+                <input type="submit" className="btn btn-sm mt-4 max-w-48 btn-success text-white" value="Create Template" />
             </form>
-
-            <dialog id="my_modal_3" className="modal z-20" ref={CustomRef}>
-                <div className="modal-box">
-                    <form method="dialog">
-                        <button className="btn btn-sm btn-circle btn-ghost absolute right-2 top-2">✕</button>
-                    </form>
-                    <form action="" className="form-control items-center">
-
-                        <label className="label cursor-pointer justify-start gap-6">
-                            <span className="label-text">Day 1</span>
-                            <input type="checkbox" value="1" className="checkbox" />
-                        </label>
-
-                        <label className="label cursor-pointer justify-start gap-6">
-                            <span className="label-text">Day 2</span>
-                            <input type="checkbox" value="1" className="checkbox" />
-                        </label>
-
-                        <label className="label cursor-pointer justify-start gap-6">
-                            <span className="label-text">Day 3</span>
-                            <input type="checkbox" value="1" className="checkbox" />
-                        </label>
-
-                        <label className="label cursor-pointer justify-start gap-6">
-                            <span className="label-text">Day 4</span>
-                            <input type="checkbox" value="1" className="checkbox" />
-                        </label>
-
-                        <label className="label cursor-pointer justify-start gap-6">
-                            <span className="label-text">Day 5</span>
-                            <input type="checkbox" value="1" className="checkbox" />
-                        </label>
-
-                        <label className="label cursor-pointer justify-start gap-6">
-                            <span className="label-text">Day 6</span>
-                            <input type="checkbox" value="1" className="checkbox" />
-                        </label>
-
-                        <label className="label cursor-pointer justify-start gap-6">
-                            <span className="label-text">Day 7</span>
-                            <input type="checkbox" value="1" className="checkbox" />
-                        </label>
-
-                        <input type="text" />
-                        <input type="submit" className="btn btn-sm" value="Apply" />
-                    </form>
-                </div>
-            </dialog>
         </section>
     )
 }
