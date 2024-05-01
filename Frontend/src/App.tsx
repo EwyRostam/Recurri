@@ -11,6 +11,7 @@ function App() {
     location.href = import.meta.env.BASE_URL;
   };
 
+  
 
   return (
     <Home />

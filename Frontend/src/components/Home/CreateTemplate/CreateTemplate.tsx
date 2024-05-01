@@ -5,6 +5,7 @@ import { useNavigate } from "react-router-dom";
 import { saveCalendarTemplate } from "../../../api/TemplateApi";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { getCookie } from "../../../helpers/CookieHelpers";
+import NavigateToLogin from "../NavigateToLogin";
 
 export type Template = {
     id?: string;
@@ -93,6 +94,7 @@ function CreateTemplate() {
     }
 
     return (
+    getCookie("email") != null  ? 
         <section className="px-4">
 
             <form action="" onSubmit={handleSubmit} className="flex flex-col gap-4">
@@ -102,6 +104,8 @@ function CreateTemplate() {
                 <input type="submit" className="btn btn-sm mt-4 max-w-48 btn-success text-white" value="Create Template" />
             </form>
         </section>
+        :
+        <NavigateToLogin/>
     )
 }
 

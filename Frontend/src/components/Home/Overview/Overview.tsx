@@ -1,6 +1,8 @@
 import { useQuery } from "@tanstack/react-query";
 import { getAllTemplates } from "../../../api/TemplateApi";
 import { Link } from "react-router-dom";
+import { getCookie } from "../../../helpers/CookieHelpers";
+import NavigateToLogin from "../NavigateToLogin";
 
 function Overview() {
 
@@ -20,6 +22,7 @@ function Overview() {
     
     console.log(data)
     return (
+    getCookie("email") != null  ? 
         <>
             <section className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 px-4">
                 <Link to="/home/createtemplate" className="border border-black pb-[100%] relative">
@@ -45,6 +48,8 @@ function Overview() {
             </section>
 
         </>
+        :
+        <NavigateToLogin/>
     )
 }
 

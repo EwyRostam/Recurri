@@ -1,10 +1,13 @@
-import { Link, useLocation } from "react-router-dom"
+import { Link, useLocation, useNavigate } from "react-router-dom"
 import CreateTemplate from "./CreateTemplate/CreateTemplate"
 import Overview from "./Overview/Overview"
 import { useEffect, useState } from "react";
 import { getCookie, setCookie } from "../../helpers/CookieHelpers";
 import { GoogleLogin } from "@react-oauth/google";
 import { jwtDecode } from 'jwt-decode';
+import { useQuery } from "@tanstack/react-query";
+import getUser from "../../api/UserApi";
+import NavigateToLogin from "./NavigateToLogin";
 
 export type User = {
   picture: string;
@@ -17,10 +20,48 @@ function Home() {
   const { pathname } = location;
   const pathArray = pathname.split("/")
   const [profile, setProfile] = useState<User>();
-
+  const navigate = useNavigate();
+  
   if (profile && !getCookie("email")) {
     setCookie("email", profile.email, 1);
   }
+
+   if (location.hash) {
+    const params = new URLSearchParams(location.hash);
+    const accessToken = params.get('access_token');
+
+    setCookie('access_token', accessToken!, 1);
+     navigate("/home");
+  };
+
+  const { data, isLoading } = useQuery({
+    queryKey: ["user"],
+    queryFn: getUser
+  })
+
+  if(isLoading)
+    {
+      return (
+      <p>
+        Loading...
+      </p>
+      )
+    }
+
+
+  // const createProfile = () => {
+  //   const user: User = {
+  //     picture: data.photos[0].url,
+  //     name: data.names[0].displayName,
+  //     email: data.emailAddresses[0].value
+  //   }
+  //   setProfile(user);
+  // }
+
+  // if(data && profile == null)
+  //   {
+  //     createProfile();
+  //   }
 
   // const logOut = () => {
   //   setProfile(undefined);
@@ -29,14 +70,6 @@ function Home() {
   //   window.location.reload();
   // };
 
-  useEffect(() => {
-    const googleCookie = getCookie("google_login_key");
-
-    if (googleCookie != undefined) {
-      setProfile(jwtDecode(googleCookie))
-    }
-
-  }, [])
 
 
   return (
@@ -76,15 +109,8 @@ function Home() {
 
     </div>
     :
-      <GoogleLogin
-      onSuccess={credentialResponse => {
-        document.cookie = `google_login_key = ${credentialResponse.credential}`
-        setProfile(jwtDecode(credentialResponse.credential as string));
-      }}
-      onError={() => {
-
-      }}
-    />
+    <NavigateToLogin />
+     
   )
 }
 

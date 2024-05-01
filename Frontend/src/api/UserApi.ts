@@ -1,10 +1,12 @@
-import { getCookie } from "../helpers/CookieHelpers";
+import { getCookie, setCookie } from "../helpers/CookieHelpers";
 
 export type User = {
-  picture: string;
-  name: string;
-  email: string;
+  emailAddresses: EmailAddresses[];
 };
+
+type EmailAddresses = {
+  value:string
+}
 
 const BASE_URL = 'https://people.googleapis.com/v1/people/me?personFields=emailAddresses,names,photos&sources=READ_SOURCE_TYPE_PROFILE&key=';
 
@@ -22,7 +24,9 @@ export default async function getUser() {
     if (!response.ok) {
       throw new Error(`Failed to fetch user info: ${response.status}`);
     }
-    return await response.json();
+    let data = await response.json() as User
+     setCookie("email", data.emailAddresses[0].value, 1)
+    return data;
   } catch (error) {
     console.error(error);
   }

@@ -7,6 +7,8 @@ import ErrorMessage from "../../../helpers/ErrorMessage";
 import LoadingMessage from "../../../helpers/LoadingMessage";
 import { convertToGoogle } from "../CreateTemplate/helpers";
 import { useState } from "react";
+import { getCookie } from "../../../helpers/CookieHelpers";
+import NavigateToLogin from "../NavigateToLogin";
 
 
 
@@ -50,7 +52,7 @@ function ViewTemplate() {
     }
 
     return (
-
+    getCookie("email") != null  ? 
         <div className="drawer lg:drawer-open">
             <input id="my-drawer" type="checkbox" className="drawer-toggle" />
             <div className="drawer-content flex flex-col">
@@ -101,6 +103,8 @@ function ViewTemplate() {
                 </ul>
             </div>
         </div>
+        :
+        <NavigateToLogin/>
     )
 }
 
