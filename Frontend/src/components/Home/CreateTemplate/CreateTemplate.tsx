@@ -93,6 +93,7 @@ function CreateTemplate() {
     }
 
     return (
+
         getCookie("email") != null ?
             <section className="px-4">
                 <form action="" onSubmit={handleSubmit} className="flex flex-col gap-4 ">
