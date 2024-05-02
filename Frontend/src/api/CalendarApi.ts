@@ -20,7 +20,7 @@ const BASE_URL =
 
 
 export async function createCalendarTemplate(eventTemplate: GoogleEvent[]) {
-  const promises = eventTemplate.map(async (event) => {
+  eventTemplate.map(async (event) => {
     const response = await fetch(
       BASE_URL,
       {
