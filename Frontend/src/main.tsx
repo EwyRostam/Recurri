@@ -64,7 +64,9 @@ ReactDOM.createRoot(document.getElementById('root')!).render(
     <React.StrictMode>
       <QueryClientProvider client={queryClient}>
         <LocalizationProvider dateAdapter={AdapterDateFns}>
-        <RouterProvider router={router} />
+          <div className='font-primary'>
+            <RouterProvider router={router} />
+          </div>
         </LocalizationProvider>
       </QueryClientProvider>
     </React.StrictMode>

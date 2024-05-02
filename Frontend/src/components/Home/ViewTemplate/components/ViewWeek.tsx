@@ -11,7 +11,7 @@ function ViewWeek({weeks}:Props) {
     <section className="flex items-center flex-col gap-4">
     {weeks.map((week, index) => {
         return(
-            <table className="table table-sm w-11/12" key={"week_"+index}>
+            <table className="table table-sm" key={"week_"+index}>
             <thead>
                 <tr>
                     <th>Week</th>
