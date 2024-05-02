@@ -1,4 +1,3 @@
-import { Template } from "../components/Home/CreateTemplate/CreateTemplate";
 import { GoogleEvent } from "../components/Home/CreateTemplate/WeekTable/Event/CalendarEvent";
 import { getCookie } from "../helpers/CookieHelpers";
 
@@ -47,26 +46,10 @@ export async function createCalendarTemplate(eventTemplate: GoogleEvent[]) {
   }
 }
 
-export async function createSprint(saltEvent: Template) {
-  await fetch(BASE_URL, {
-    method: "POST",
-    headers: {
-      "Content-type": "application/json; charset=UTF-8",
-      Authorization: `Bearer ${getCookie("access_token")}`,
-    },
-    body: JSON.stringify(saltEvent),
-  }).then((data) => {
-    alert("Event created, check your Google Calendar!");
-    return data.json();
-  });
-}
-
-export const getSingleEvent = async (): Promise<EventData | null> => {
+export const getSingleEvent = async (eventId: string): Promise<EventData | null> => {
   try {
     const response = await fetch(
-      BASE_URL +
-        "/vjp0ov2kgqgealhn2aptl9h89o?key=" +
-        import.meta.env.VITE_APP_API_KEY,
+      `${BASE_URL}/${eventId}?key=${import.meta.env.VITE_APP_API_KEY}`,
       {
         headers: {
           Authorization: `Bearer ${getCookie("access_token")}`,
@@ -79,7 +62,6 @@ export const getSingleEvent = async (): Promise<EventData | null> => {
     }
 
     const eventData: EventData = await response.json();
-    console.log("eventData", eventData);
     return eventData;
   } catch (error) {
     console.error("There was a problem with the fetch operation:", error);
@@ -101,9 +83,7 @@ export async function deleteCalendarEvent(eventId: string) {
   alert("Event deleted, check your Google Calendar!");
 }
 
-export const getReocurringEvents = async (
-  template: string
-): Promise<string[] | null> => {
+export const getReocurringEvents = async (template: string): Promise<string[] | null> => {
   try {
     const response = await fetch(
       BASE_URL +
@@ -122,10 +102,6 @@ export const getReocurringEvents = async (
     }
 
     const eventDataArr: EventDataArr = await response.json();
-    console.log(
-      "eventDataArr",
-      eventDataArr.items.map((event) => event.id)
-    );
     return eventDataArr.items.map((event) => event.id);
   } catch (error) {
     console.error("There was a problem with the fetch operation:", error);
