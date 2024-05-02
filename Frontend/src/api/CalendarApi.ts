@@ -20,7 +20,7 @@ const BASE_URL =
 
 
 export async function createCalendarTemplate(eventTemplate: GoogleEvent[]) {
-  const promises = eventTemplate.map(async (event) => {
+  eventTemplate.map(async (event) => {
     const response = await fetch(
       BASE_URL,
       {
@@ -37,9 +37,7 @@ export async function createCalendarTemplate(eventTemplate: GoogleEvent[]) {
   });
 
   try {
-    const results = await Promise.all(promises);
-    alert("All events created, check your Google Calendar!");
-    console.log(results);
+
   } catch (error) {
     console.error("Error creating events", error);
     alert("Failed to create events");
@@ -112,7 +110,6 @@ export const getReocurringEvents = async (template: string): Promise<string[] | 
 export async function deleteTemplate(template: string) {
   const result = await getReocurringEvents(template);
   if (result) {
-    console.log("Deleting events with id: ", result);
     result.map((event) => deleteCalendarEvent(event));
     alert("Event deleted, check your Google Calendar!");
   }
@@ -146,7 +143,6 @@ export async function changeDate(): Promise<EventData | null> {
     }
   
     const eventData: EventData = await response.json();
-    console.log("eventData", eventData);
     return eventData;
   } catch (error) {
     console.error("There was a problem with the fetch operation:", error);

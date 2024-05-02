@@ -1,33 +1,21 @@
-import { useGoogleLogin } from "@react-oauth/google";
-import { setCookie } from "../../helpers/CookieHelpers";
-import Logo from "./finalLogo.png"
-import './login.css'
+// const redirectLink = "http://localhost:5173"
+const redirectLink = "https://purple-beach-01fecc303.5.azurestaticapps.net"
 
-const LOGIN_URL = `https://accounts.google.com/o/oauth2/v2/auth?scope=https://www.googleapis.com/auth/calendar&include_granted_scopes=true&response_type=token&state=state_parameter_passthrough_value&redirect_uri=http://localhost:5173&client_id=1021052820543-fm1vrkkpkq1idpvckttevn0ir9d9qdc2.apps.googleusercontent.com`;
+const LOGIN_URL = `https://accounts.google.com/o/oauth2/v2/auth?scope=https://www.googleapis.com/auth/calendar&include_granted_scopes=true&response_type=token&state=state_parameter_passthrough_value&redirect_uri=${redirectLink}&client_id=1021052820543-fm1vrkkpkq1idpvckttevn0ir9d9qdc2.apps.googleusercontent.com`;
 
 export const getProfile = () => {
     location.href = LOGIN_URL;
 }
 
 function Login() {
-    // const navigate = useNavigate()
 
     const login = () => {
         getProfile()
     }
-    // const login = useGoogleLogin({
-    //     onSuccess: codeResponse => {
-    //         console.log(codeResponse)
-    //         setCookie('access_token', codeResponse.access_token!, 1);
-    //         // navigate("/home");
-    //     },
-    //     scope: 'https://www.googleapis.com/auth/calendar',
-    //     include_granted_scopes: true
-    // });
 
     return (
         <section className="w-full h-screen flex justify-center items-center flex-col gap-4">
-            <img src={Logo} alt="logo" className="logo-picture" />
+            <img src={"https://i.ibb.co/fDYX9wj/final-Logo.png"} alt="logo" className="w-[40%] h-auto" />
             <h1 className="text-2xl">Recurri</h1>
             <p> Create Calendar Templates for recurring events!</p>
             <button type="button" onClick={() => login()} className="text-white w-full  bg-[#4285F4] hover:bg-[#4285F4]/90 focus:ring-4 focus:outline-none focus:ring-[#4285F4]/50 font-medium rounded-lg text-sm px-5 py-2.5 text-center inline-flex items-center justify-between mr-2 mb-2 max-w-sm">

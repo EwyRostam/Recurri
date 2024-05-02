@@ -20,7 +20,6 @@ function Overview() {
 
     if (isError) return <p>An error occured</p>
     
-    console.log(data)
     return (
     getCookie("email") != null  ? 
         <>
