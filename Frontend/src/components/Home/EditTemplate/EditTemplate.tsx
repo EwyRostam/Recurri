@@ -99,13 +99,13 @@ function EditTemplate() {
             <div className="drawer lg:drawer-open">
                 <input id="my-drawer" type="checkbox" className="drawer-toggle" />
                 <div className="drawer-content flex flex-col">
-                    <label htmlFor="my-drawer" className="btn drawer-button lg:hidden h-8 justify-start" >
-                        <svg width="40px" height="40px" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                            <path d="M4 18L20 18" stroke="#000000" stroke-width="2" stroke-linecap="round" />
-                            <path d="M4 12L20 12" stroke="#000000" stroke-width="2" stroke-linecap="round" />
-                            <path d="M4 6L20 6" stroke="#000000" stroke-width="2" stroke-linecap="round" />
-                        </svg>
-                    </label>
+                <label htmlFor="my-drawer" className="btn drawer-button lg:hidden h-8 justify-start" >
+              <svg width="40px" height="40px" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path d="M4 18L20 18" stroke="#000000" stroke-width="2" stroke-linecap="round" />
+                <path d="M4 12L20 12" stroke="#000000" stroke-width="2" stroke-linecap="round" />
+                <path d="M4 6L20 6" stroke="#000000" stroke-width="2" stroke-linecap="round" />
+              </svg>
+            </label>
 
                     <div className="pl-4 text-sm breadcrumbs h-12">
                         <ul>
@@ -128,7 +128,6 @@ function EditTemplate() {
                             <ErrorMessage />
                             :
                             <section className="px-4">
-
                                 <form action="" onSubmit={handleSubmit} className="flex flex-col gap-4">
                                     <input type="text" name="name" className="input input-bordered w-full input-sm max-w-xs" value={name} onChange={handleChange} />
                                     <button type="button" onClick={handleAddWeek} className="btn btn-sm max-w-48">+ Add Week</button>
