@@ -20,36 +20,20 @@ const BASE_URL =
   "https://www.googleapis.com/calendar/v3/calendars/primary/events";
 
 
-
-export async function createCalendarEvent(singleEvent: Event) {
-  await fetch(BASE_URL, {
-    method: "POST",
-    headers: {
-      "Content-type": "application/json; charset=UTF-8",
-      Authorization: `Bearer ${getCookie("access_token")}`,
-    },
-    body: JSON.stringify(singleEvent),
-  }).then((data) => {
-    alert("Event created, check your Google Calendar!");
-    return data.json();
-  });
-}
-
 export async function createCalendarTemplate(eventTemplate: GoogleEvent[]) {
   const promises = eventTemplate.map(async (event) => {
     const response = await fetch(
-      "https://www.googleapis.com/calendar/v3/calendars/primary/events",
+      BASE_URL,
       {
         method: "POST",
         headers: {
           "Content-type": "application/json; charset=UTF-8",
-          Authorization: `Bearer ${getCookie("access_token")}`, // Access token for Google
+          Authorization: `Bearer ${getCookie("access_token")}`,
         },
         body: JSON.stringify(event),
       }
     );
     const data = await response.json();
-    console.log(data);
     return data;
   });
 
