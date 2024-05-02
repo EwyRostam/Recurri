@@ -52,14 +52,9 @@ function CalendarEvent({ setWeeks, index, weekIndex, weeks,event }: Props) {
 
     const handleDeleteEvent = () => {
         const updatedWeeks = [...weeks];
-        console.log("before delete",updatedWeeks)
-        console.log("index", index)
         updatedWeeks[weekIndex].events.splice(index, 1);
-        console.log("after delete", updatedWeeks)
         if(updatedWeeks[weekIndex].events.length == 0){
-            console.log("weekindex", weekIndex)
             updatedWeeks.splice(weekIndex,1)
-            console.log("after week delete",updatedWeeks)
         }
         setWeeks(updatedWeeks);
     };

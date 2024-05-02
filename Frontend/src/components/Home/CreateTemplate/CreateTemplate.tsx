@@ -96,7 +96,6 @@ function CreateTemplate() {
     return (
     getCookie("email") != null  ? 
         <section className="px-4">
-
             <form action="" onSubmit={handleSubmit} className="flex flex-col gap-4">
                 <input type="text" name="templateName" className="input input-bordered w-full input-sm max-w-xs" placeholder="Template name" />
                 <button type="button" onClick={handleAddWeek} className="btn btn-sm max-w-48 btn-primary">+ Add Week</button>
