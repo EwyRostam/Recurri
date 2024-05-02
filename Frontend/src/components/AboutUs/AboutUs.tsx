@@ -30,7 +30,7 @@ function AboutUs() {
                         Say goodbye to the time-consuming task of event planning and hello to effortless scheduling with <span className="font-bold">Recurri </span>!
                     </p>
                     <br />
-                    <img src={calendar} alt="calendar" className="img-container" />
+                    <img src={calendar} alt="calendar" className="w-[15%] h-auto" />
                 </div>
 
 
