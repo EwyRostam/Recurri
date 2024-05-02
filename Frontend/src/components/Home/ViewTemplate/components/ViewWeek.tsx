@@ -8,10 +8,10 @@ type Props = {
 function ViewWeek({weeks}:Props) {
     console.log(weeks)
   return (
-    <section className="flex items-center flex-col gap-4">
+    <section className="flex items-center flex-col gap-4 px-1 sm:p-0">
     {weeks.map((week, index) => {
         return(
-            <table className="table table-sm" key={"week_"+index}>
+            <table className="table  table-sm" key={"week_"+index}>
             <thead>
                 <tr>
                     <th>Week</th>

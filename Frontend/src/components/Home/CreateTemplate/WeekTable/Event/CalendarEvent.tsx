@@ -65,7 +65,7 @@ function CalendarEvent({ setWeeks, index, weekIndex, weeks,event }: Props) {
     };
 
     return (
-        <tr>
+        <tr className="">
             <td><input onChange={handleInputChange} value={event.name} name="name" type="text" className="input input-bordered w-full input-sm max-w-xs " /> </td>
             <td><input onChange={handleInputChange} value={event.description} name="description" type="text" className="input input-bordered w-full input-sm max-w-xs " /></td>
             <td><input onChange={handleInputChange} value={event.day} name="day" type="number" className="input input-bordered w-full input-sm max-w-xs " /></td>

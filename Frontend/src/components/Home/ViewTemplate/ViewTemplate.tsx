@@ -101,7 +101,7 @@ function ViewTemplate() {
                                     }
                                 }/>
                                 
-                                <div className="pt-4 flex gap-4">
+                                <div className="pt-4 flex gap-4 flex-col sm:flex-row">
                                     <button onClick={() => handleApply()} className="btn btn-sm py-1 max-w-xs btn-success text-white">Apply Template </button>
                                     <button onClick={() => deleteTemplateById()} className="btn btn-sm py-1 max-w-xs btn-error text-white">Delete Template </button>
                                     <Link to={`/home/editTemplate/${template!.id}`} className="btn btn-sm py-1 max-w-xs btn-info text-white"> Edit Template </Link>
