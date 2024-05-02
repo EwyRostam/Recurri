@@ -1,10 +1,10 @@
 import { Link, useLocation, useNavigate } from "react-router-dom"
 import CreateTemplate from "./CreateTemplate/CreateTemplate"
 import Overview from "./Overview/Overview"
-import { deleteCookie, getCookie, setCookie } from "../../helpers/CookieHelpers";
+import { deleteCookie, setCookie } from "../../helpers/CookieHelpers";
 import { useQuery } from "@tanstack/react-query";
 import getUser from "../../api/UserApi";
-import NavigateToLogin from "./NavigateToLogin";
+
 import LoadingMessage from "../../helpers/LoadingMessage";
 
 export type User = {
@@ -45,7 +45,6 @@ function Home() {
 
 
   return (
-    getCookie("email") != null ?
       <div className="font-primary">
         <div className="drawer lg:drawer-open">
           <input id="my-drawer" type="checkbox" className="drawer-toggle" />
@@ -100,8 +99,6 @@ function Home() {
         </div>
 
       </div>
-      :
-      <NavigateToLogin />
 
   )
 }

@@ -8,7 +8,7 @@ import WeekTable from "../CreateTemplate/WeekTable/WeekTable";
 import { getCookie } from "../../../helpers/CookieHelpers";
 import LoadingMessage from "../../../helpers/LoadingMessage";
 import ErrorMessage from "../../../helpers/ErrorMessage";
-import NavigateToLogin from "../NavigateToLogin";
+
 
 function EditTemplate() {
     const navigate = useNavigate();
@@ -95,7 +95,7 @@ function EditTemplate() {
     }
 
     return (
-        getCookie("email") != null ?
+
             <div className="drawer lg:drawer-open">
                 <input id="my-drawer" type="checkbox" className="drawer-toggle" />
                 <div className="drawer-content flex flex-col">
@@ -151,8 +151,6 @@ function EditTemplate() {
                     </ul>
                 </div>
             </div>
-            :
-            <NavigateToLogin />
     )
 }
 

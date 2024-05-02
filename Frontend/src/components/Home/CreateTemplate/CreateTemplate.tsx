@@ -93,8 +93,6 @@ function CreateTemplate() {
     }
 
     return (
-
-        getCookie("email") != null ?
             <section className="px-4">
                 <form action="" onSubmit={handleSubmit} className="flex flex-col gap-4 ">
                     <input type="text" name="templateName" className="input input-bordered w-full input-sm max-w-xs" placeholder="Template name" />
@@ -105,8 +103,6 @@ function CreateTemplate() {
                     <input type="submit" className="btn btn-sm mt-4 max-w-48 btn-success text-white" value="Create Template" />
                 </form>
             </section>
-            :
-            <NavigateToLogin />
     )
 }
 
