@@ -92,7 +92,7 @@ function Home() {
               <li><Link to={"/home"}>Home</Link></li>
               <li><Link to={"/home/createtemplate"}>Create template</Link></li>
               <li><Link to={"/aboutus"}>About us</Link></li>
-              <button className="absolute bottom-2 left-4" onClick={() => logOut()}>
+              <button className="absolute bottom-2 left-4 btn" onClick={() => logOut()}>
                 Log Out
               </button>
             </ul>
