@@ -1,13 +1,11 @@
 import { Link, useLocation, useNavigate } from "react-router-dom"
 import CreateTemplate from "./CreateTemplate/CreateTemplate"
 import Overview from "./Overview/Overview"
-import { useEffect, useState } from "react";
 import { getCookie, setCookie } from "../../helpers/CookieHelpers";
-import { GoogleLogin } from "@react-oauth/google";
-import { jwtDecode } from 'jwt-decode';
 import { useQuery } from "@tanstack/react-query";
 import getUser from "../../api/UserApi";
 import NavigateToLogin from "./NavigateToLogin";
+import LoadingMessage from "../../helpers/LoadingMessage";
 
 export type User = {
   picture: string;
@@ -19,22 +17,16 @@ function Home() {
   const location = useLocation();
   const { pathname } = location;
   const pathArray = pathname.split("/")
-  const [profile, setProfile] = useState<User>();
   const navigate = useNavigate();
-  
-  if (profile && !getCookie("email")) {
-    setCookie("email", profile.email, 1);
-  }
 
    if (location.hash) {
     const params = new URLSearchParams(location.hash);
     const accessToken = params.get('access_token');
-
     setCookie('access_token', accessToken!, 1);
-     navigate("/home");
+    navigate("/home");
   };
 
-  const { data, isLoading } = useQuery({
+  const {isLoading} = useQuery({
     queryKey: ["user"],
     queryFn: getUser
   })
@@ -42,35 +34,9 @@ function Home() {
   if(isLoading)
     {
       return (
-      <p>
-        Loading...
-      </p>
+        <LoadingMessage />
       )
     }
-
-
-  // const createProfile = () => {
-  //   const user: User = {
-  //     picture: data.photos[0].url,
-  //     name: data.names[0].displayName,
-  //     email: data.emailAddresses[0].value
-  //   }
-  //   setProfile(user);
-  // }
-
-  // if(data && profile == null)
-  //   {
-  //     createProfile();
-  //   }
-
-  // const logOut = () => {
-  //   setProfile(undefined);
-  //   deleteCookie("access_token");
-  //   deleteCookie("google_login_key");
-  //   window.location.reload();
-  // };
-
-
 
   return (
     getCookie("email") != null  ? 

@@ -25,7 +25,7 @@ export default async function getUser() {
       throw new Error(`Failed to fetch user info: ${response.status}`);
     }
     let data = await response.json() as User
-     setCookie("email", data.emailAddresses[0].value, 1)
+    setCookie("email", data.emailAddresses[0].value, 1)
     return data;
   } catch (error) {
     console.error(error);
