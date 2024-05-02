@@ -21,7 +21,7 @@ function WeekTable({weeks, handleAddEvent, setWeeks}: Props) {
             {weeks.map((week, index) => {
                 return(
 
-                    <table className="table table-sm" key={"week_"+index}>
+                    <table className="table table-sm" key={"week_"+index} >
                     <thead>
                         <tr>
                             <th>Week</th>

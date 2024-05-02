@@ -86,7 +86,10 @@ function ViewTemplate() {
                             :
                             <section className="w-11/12 mx-auto flex flex-col gap-4">
                                 <h1 className="pb-4">{template!.name}</h1>
+                                <div className="w-[320px] overflow-scroll sm:w-auto sm:overflow-auto">
+
                                 {<ViewWeek weeks={template!.weeks} />}
+                                </div>
 
                                 <label htmlFor="startDate" className="font-bold text-[var(--fallback-bc,oklch(var(--bc)/0.6))] text-sm">Enter Start Date: </label>
                                 <DatePicker name="startDate" value={startDate} onChange={(date) => setStartDate(date!)} className="max-w-xs" sx={

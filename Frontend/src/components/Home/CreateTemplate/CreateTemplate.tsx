@@ -19,7 +19,6 @@ export type Week = {
     events: CalendarEvent[];
 }
 
-
 function CreateTemplate() {
     const navigate = useNavigate();
     const [weeks, setWeeks] = useState<Week[]>([{
@@ -69,13 +68,13 @@ function CreateTemplate() {
 
     const mutation = useMutation({
         mutationFn: (template: Template) => {
-          return saveCalendarTemplate(template);
-    
+            return saveCalendarTemplate(template);
+
         },
         onSuccess: () => {
-          queryClient.invalidateQueries({queryKey:['templates']})
+            queryClient.invalidateQueries({ queryKey: ['templates'] })
         }
-      })
+    })
 
     const handleSubmit = (e: FormEvent<HTMLFormElement>) => {
         e.preventDefault();
@@ -94,18 +93,19 @@ function CreateTemplate() {
     }
 
     return (
-    getCookie("email") != null  ? 
-        <section className="px-4">
-
-            <form action="" onSubmit={handleSubmit} className="flex flex-col gap-4">
-                <input type="text" name="templateName" className="input input-bordered w-full input-sm max-w-xs" placeholder="Template name" />
-                <button type="button" onClick={handleAddWeek} className="btn btn-sm max-w-48 btn-primary">+ Add Week</button>
-                <WeekTable weeks={weeks} handleAddEvent={handleAddEvent} setWeeks={setWeeks} CustomRef={CustomRef} />
-                <input type="submit" className="btn btn-sm mt-4 max-w-48 btn-success text-white" value="Create Template" />
-            </form>
-        </section>
-        :
-        <NavigateToLogin/>
+        getCookie("email") != null ?
+            <section className="px-4">
+                <form action="" onSubmit={handleSubmit} className="flex flex-col gap-4 ">
+                    <input type="text" name="templateName" className="input input-bordered w-full input-sm max-w-xs" placeholder="Template name" />
+                    <button type="button" onClick={handleAddWeek} className="btn btn-sm max-w-48 btn-primary">+ Add Week</button>
+                    <div className="w-[320px] overflow-scroll sm:w-auto sm:overflow-auto">
+                        <WeekTable weeks={weeks} handleAddEvent={handleAddEvent} setWeeks={setWeeks} CustomRef={CustomRef} />
+                    </div>
+                    <input type="submit" className="btn btn-sm mt-4 max-w-48 btn-success text-white" value="Create Template" />
+                </form>
+            </section>
+            :
+            <NavigateToLogin />
     )
 }
 
