@@ -1,7 +1,7 @@
 import { Link, useLocation, useNavigate } from "react-router-dom"
 import CreateTemplate from "./CreateTemplate/CreateTemplate"
 import Overview from "./Overview/Overview"
-import { getCookie, setCookie } from "../../helpers/CookieHelpers";
+import { deleteCookie, getCookie, setCookie } from "../../helpers/CookieHelpers";
 import { useQuery } from "@tanstack/react-query";
 import getUser from "../../api/UserApi";
 import NavigateToLogin from "./NavigateToLogin";
@@ -36,6 +36,13 @@ function Home() {
       <LoadingMessage />
     )
   }
+
+  const logOut = () => {
+    deleteCookie("email");
+    deleteCookie("access_token");
+    window.location.reload();
+  };
+
 
   return (
     getCookie("email") != null ?
@@ -85,6 +92,9 @@ function Home() {
               <li><Link to={"/home"}>Home</Link></li>
               <li><Link to={"/home/createtemplate"}>Create template</Link></li>
               <li><Link to={"/aboutus"}>About us</Link></li>
+              <button className="absolute bottom-2 left-4" onClick={() => logOut()}>
+                Log Out
+              </button>
             </ul>
           </div>
         </div>
