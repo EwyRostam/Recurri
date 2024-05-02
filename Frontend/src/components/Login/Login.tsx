@@ -14,7 +14,7 @@ function Login() {
     }
 
     return (
-        <section className="w-full h-screen flex justify-center items-center flex-col gap-4">
+        <section className="px-5 text-center w-full h-screen flex justify-center items-center flex-col gap-4">
             <img src={"https://i.ibb.co/fDYX9wj/final-Logo.png"} alt="logo" className="w-[40%] h-auto" />
             <h1 className="text-2xl">Recurri</h1>
             <p> Create Calendar Templates for recurring events!</p>
