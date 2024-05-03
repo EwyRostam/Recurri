@@ -4,16 +4,14 @@ import { GoogleEvent } from "./WeekTable/Event/CalendarEvent";
 import { createCalendarTemplate } from "../../../api/CalendarApi";
 
 export function converToDate(date:Date, weekNumber :number, eventTime:string, dayNumber:number ){
-
     date = startOfDay(date)
-    const daysToAdd = (weekNumber-1) * 7 + dayNumber
+    const daysToAdd = (weekNumber-1) * 7 + (dayNumber - 1)
     date = addDays(date, daysToAdd)
     const [hoursString, minutesString] = eventTime.split(":");
     const hours = parseInt(hoursString, 10);
     const minutes = parseInt(minutesString, 10);
     date = addHours(date, hours +2)
     date = addMinutes(date, minutes)
-
     return date
 }
 

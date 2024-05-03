@@ -1,4 +1,5 @@
 import { Link } from "react-router-dom";
+import { logOut } from "../Home/Home";
 
 function AboutUs() {
 
@@ -51,6 +52,9 @@ function AboutUs() {
                     <li><Link to={"/home"}>Home</Link></li>
                     <li><Link to={"/home/createtemplate"}>Create template</Link></li>
                     <li><Link to={"/aboutus"}>About us</Link></li>
+                    <button className="absolute bottom-2 left-4 btn" onClick={() => logOut()}>
+                        Log Out
+                    </button>
                 </ul>
             </div>
         </div>

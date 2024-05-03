@@ -13,6 +13,12 @@ export type User = {
   email: string;
 };
 
+  export const logOut = () => {
+    deleteCookie("email");
+    deleteCookie("access_token");
+    window.location.href = "/login"
+  };
+
 function Home() {
   const location = useLocation();
   const { pathname } = location;
@@ -37,11 +43,6 @@ function Home() {
     )
   }
 
-  const logOut = () => {
-    deleteCookie("email");
-    deleteCookie("access_token");
-    window.location.reload();
-  };
 
 
   return (

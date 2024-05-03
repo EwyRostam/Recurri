@@ -5,7 +5,6 @@ import { useNavigate } from "react-router-dom";
 import { saveCalendarTemplate } from "../../../api/TemplateApi";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { getCookie } from "../../../helpers/CookieHelpers";
-import NavigateToLogin from "../NavigateToLogin";
 
 export type Template = {
     id?: string;

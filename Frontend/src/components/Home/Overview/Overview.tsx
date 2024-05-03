@@ -1,6 +1,8 @@
 import { useQuery } from "@tanstack/react-query";
 import { getAllTemplates } from "../../../api/TemplateApi";
 import { Link } from "react-router-dom";
+import LoadingMessage from "../../../helpers/LoadingMessage";
+import ErrorMessage from "../../../helpers/ErrorMessage";
 
 function Overview() {
 
@@ -10,16 +12,12 @@ function Overview() {
     });
 
     if (isLoading) return (
-        <div className="w-full h-full flex items-center justify-center flex-col">
-            <p>Loading...</p>
-            <span className="loading loading-spinner loading-lg"></span>
-        </div>
+        <LoadingMessage />
     )
 
-    if (isError) return <p>An error occured</p>
+    if (isError) return <ErrorMessage />
 
     return (
-            <>
                 <section className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 px-4">
                     <Link to="/home/createtemplate" className="border border-black pb-[100%] relative">
                         <div className="absolute inset-0 flex items-center justify-center flex-col gap-4">
@@ -39,8 +37,6 @@ function Overview() {
                         </Link>
                     )}
                 </section>
-            </>
-
     )
 }
 
