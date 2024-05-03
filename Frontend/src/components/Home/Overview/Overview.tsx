@@ -29,8 +29,6 @@ function Overview() {
                             Create Template
                         </div>
                     </Link>
-
-
                     {data && data.map((template, index) =>
 
                         <Link to={`/home/template/${template.id}`} key={template.name + index} className="border border-black pb-[100%] relative">
@@ -39,7 +37,6 @@ function Overview() {
                                 {template.name}
                             </div>
                         </Link>
-
                     )}
                 </section>
             </>
