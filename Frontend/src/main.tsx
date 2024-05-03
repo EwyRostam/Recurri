@@ -17,7 +17,7 @@ import {ToastContainer} from 'react-toastify';
 const router = createBrowserRouter([
   {
     path: "/",
-    element: <Home />,
+    element: <Login />,
   },
   {
     path: "/about",
