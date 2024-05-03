@@ -52,7 +52,7 @@ export async function saveCalendarTemplate(eventTemplate: Template) {
   }
 
   export async function deleteTemplate(id: string) {
-    const response = await fetch(`${BASE_URL}/${id}`,
+  await fetch(`${BASE_URL}/${id}`,
     {
       method: "DELETE",
       headers: {
@@ -60,6 +60,4 @@ export async function saveCalendarTemplate(eventTemplate: Template) {
       }
     }
     );
-    const data = await response.json();
-    return data as Template;
   }

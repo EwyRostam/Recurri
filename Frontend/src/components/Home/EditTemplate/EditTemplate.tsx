@@ -9,6 +9,7 @@ import { getCookie } from "../../../helpers/CookieHelpers";
 import LoadingMessage from "../../../helpers/LoadingMessage";
 import ErrorMessage from "../../../helpers/ErrorMessage";
 import { logOut } from "../Home";
+import {toast } from 'react-toastify';
 
 
 function EditTemplate() {
@@ -60,12 +61,6 @@ function EditTemplate() {
         queryFn: () => getTemplateById(pathArray[pathArray.length - 1])
     });
 
-    useEffect(() => {
-        if (template) {
-            setName(template.name);
-            setWeeks(template.weeks)
-        }
-    }, [])
 
     const mutation = useMutation({
         mutationFn: (template: Template) => {
@@ -74,8 +69,12 @@ function EditTemplate() {
         },
         onSuccess: () => {
             queryClient.invalidateQueries({ queryKey: ['templates'] })
+            toast("Successfully edited your template!")
             navigate("/home")
         },
+        onError: ()=>(
+            toast("An error has occured please try again!")
+        )
     })
 
     const handleSubmit = (e: FormEvent<HTMLFormElement>) => {
@@ -87,6 +86,7 @@ function EditTemplate() {
             weeks: weeks,
             id: pathArray[pathArray.length - 1]
         };
+        toast("Uploading changes ...")
         mutation.mutate(template);
     }
 
@@ -95,8 +95,15 @@ function EditTemplate() {
         setName((e.target as HTMLInputElement).value);
     }
 
-    return (
 
+    useEffect(() => {
+        if (template) {
+            setName(template.name);
+            setWeeks(template.weeks)
+        }
+    }, [isLoading])
+
+    return (
         <div className="drawer lg:drawer-open">
             <input id="my-drawer" type="checkbox" className="drawer-toggle" />
             <div className="drawer-content flex flex-col">
@@ -130,12 +137,12 @@ function EditTemplate() {
                         :
                         <section className="px-4">
                             <form action="" onSubmit={handleSubmit} className="flex flex-col gap-4">
-                                <input type="text" name="name" className="input input-bordered w-full input-sm max-w-xs" value={name} onChange={handleChange} />
-                                <button type="button" onClick={handleAddWeek} className="btn btn-sm max-w-48">+ Add Week</button>
+                                <input type="text" required name="name" className="input input-bordered w-full input-sm max-w-xs" value={name} onChange={handleChange} />
+                                <button type="button" onClick={handleAddWeek} className="btn btn-sm max-w-48 btn-primary">+ Add Week</button>
                                 <div className="w-[320px] overflow-scroll sm:w-auto sm:overflow-auto">
                                     <WeekTable weeks={weeks} handleAddEvent={handleAddEvent} setWeeks={setWeeks} CustomRef={CustomRef} />
                                 </div>
-                                <input type="submit" className="btn btn-sm mt-4 max-w-48" value="Edit Template" />
+                                <input type="submit" className="btn btn-sm mt-4 max-w-48 btn-success text-white" value="Edit" />
                             </form>
                         </section>
                 }

@@ -5,6 +5,7 @@ import { useNavigate } from "react-router-dom";
 import { saveCalendarTemplate } from "../../../api/TemplateApi";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { getCookie } from "../../../helpers/CookieHelpers";
+import {toast} from 'react-toastify';
 
 export type Template = {
     id?: string;
@@ -72,6 +73,11 @@ function CreateTemplate() {
         },
         onSuccess: () => {
             queryClient.invalidateQueries({ queryKey: ['templates'] })
+            toast("Successfully added your template!")
+            navigate("/home")
+        },
+        onError: ()=> {
+            toast("An Error has occured")
         }
     })
 
@@ -86,15 +92,14 @@ function CreateTemplate() {
             name: templateName.value,
             weeks: weeks
         };
-
+        toast("Uploading ...")
         mutation.mutate(template);
-        navigate("/home")
     }
 
     return (
             <section className="px-4">
                 <form action="" onSubmit={handleSubmit} className="flex flex-col gap-4 ">
-                    <input type="text" name="templateName" className="input input-bordered w-full input-sm max-w-xs" placeholder="Template name" />
+                    <input type="text" name="templateName" className="input input-bordered w-full input-sm max-w-xs" required placeholder="Template name" />
                     <button type="button" onClick={handleAddWeek} className="btn btn-sm max-w-48 btn-primary">+ Add Week</button>
                     <div className="w-[320px] overflow-scroll sm:w-auto sm:overflow-auto">
                         <WeekTable weeks={weeks} handleAddEvent={handleAddEvent} setWeeks={setWeeks} CustomRef={CustomRef} />

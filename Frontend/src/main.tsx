@@ -11,8 +11,8 @@ import ViewTemplate from './components/Home/ViewTemplate/ViewTemplate';
 import EditTemplate from './components/Home/EditTemplate/EditTemplate';
 import { LocalizationProvider } from '@mui/x-date-pickers';
 import { AdapterDateFns } from '@mui/x-date-pickers/AdapterDateFnsV3'
-
-
+import 'react-toastify/dist/ReactToastify.css';
+import {ToastContainer} from 'react-toastify';
 
 const router = createBrowserRouter([
   {
@@ -65,6 +65,7 @@ ReactDOM.createRoot(document.getElementById('root')!).render(
       <QueryClientProvider client={queryClient}>
         <LocalizationProvider dateAdapter={AdapterDateFns}>
           <div className='font-primary'>
+          <ToastContainer />
             <RouterProvider router={router} />
           </div>
         </LocalizationProvider>

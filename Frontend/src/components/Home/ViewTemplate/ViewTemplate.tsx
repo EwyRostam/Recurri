@@ -8,6 +8,7 @@ import LoadingMessage from "../../../helpers/LoadingMessage";
 import { convertToGoogle } from "../CreateTemplate/helpers";
 import { useState } from "react";
 import { logOut } from "../Home";
+import {toast } from 'react-toastify';
 
 function ViewTemplate() {
     const location = useLocation();
@@ -17,10 +18,8 @@ function ViewTemplate() {
     const [startDate, setStartDate] = useState<Date>(new Date());
 
     const { data: template, isLoading, isError } = useQuery({
-        queryKey: ['templates', pathArray[pathArray.length - 1]],
+        queryKey: ['template', pathArray[pathArray.length - 1]],
         queryFn: () => getTemplateById(pathArray[pathArray.length - 1])
-
-
     });
 
     const queryClient = useQueryClient();
@@ -31,18 +30,27 @@ function ViewTemplate() {
         },
         onSuccess: () => {
             queryClient.invalidateQueries({ queryKey: ['templates'] })
+            toast("Successfully delete your template!")
             navigate("/home")
+        },
+        onError: ()=> {
+            toast("An Error has occured")
         }
     })
 
     const deleteTemplateById = () => {
         mutation.mutate();
-        navigate("/home")
     }
 
     function handleApply(): void {
         let templates = template!.weeks
-        convertToGoogle(templates, startDate!)
+        try{
+            convertToGoogle(templates, startDate!)
+            toast("Successfully added to your calendar!")
+            
+        }catch{
+            toast("An error has occured!")
+        }
     }
 
     return (
@@ -98,9 +106,9 @@ function ViewTemplate() {
                             } />
 
                             <div className="pt-4 flex gap-4 flex-col sm:flex-row">
-                                <button onClick={() => handleApply()} className="btn btn-sm py-1 max-w-xs btn-success text-white">Apply Template </button>
-                                <button onClick={() => deleteTemplateById()} className="btn btn-sm py-1 max-w-xs btn-error text-white">Delete Template </button>
-                                <Link to={`/home/editTemplate/${template!.id}`} className="btn btn-sm py-1 max-w-xs btn-info text-white"> Edit Template </Link>
+                                <button onClick={() => handleApply()} className="btn btn-sm py-1 max-w-xs btn-success text-white"> Add To Calendar </button>
+                                <button onClick={() => deleteTemplateById()} className="btn btn-sm py-1 max-w-xs btn-error text-white">Delete </button>
+                                <Link to={`/home/editTemplate/${template!.id}`} className="btn btn-sm py-1 max-w-xs btn-info text-white"> Edit </Link>
                             </div>
                         </section>
                 }
