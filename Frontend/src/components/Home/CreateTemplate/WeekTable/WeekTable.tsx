@@ -28,7 +28,7 @@ function WeekTable({weeks, handleAddEvent, setWeeks}: Props) {
                             <th><button type="button" className="btn btn-sm btn-primary" onClick={()=>handleAddEvent(index)}> + Add Event</button></th>
                         </tr>
                         <tr>
-                            <th>Summary</th>
+                            <th>Title</th>
                             <th>Description</th>
                             <th>Day</th>
                             <th>Start</th>

@@ -17,7 +17,7 @@ function ViewWeek({weeks}:Props) {
                     <th>{week.number}</th>
                 </tr>
                 <tr>
-                    <th className="w-1/5">Summary</th>
+                    <th className="w-1/5">Title</th>
                     <th className="w-1/5">Description</th>
                     <th className="w-1/5">Day</th>
                     <th className="w-1/5">Start</th>
