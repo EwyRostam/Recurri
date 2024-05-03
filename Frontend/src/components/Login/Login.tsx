@@ -1,5 +1,5 @@
 // const redirectLink = "http://localhost:5173"
-const redirectLink = "https://purple-beach-01fecc303.5.azurestaticapps.net"
+const redirectLink = "https://purple-beach-01fecc303.5.azurestaticapps.net/home"
 
 const LOGIN_URL = `https://accounts.google.com/o/oauth2/v2/auth?scope=https://www.googleapis.com/auth/calendar&include_granted_scopes=true&response_type=token&state=state_parameter_passthrough_value&redirect_uri=${redirectLink}&client_id=1021052820543-fm1vrkkpkq1idpvckttevn0ir9d9qdc2.apps.googleusercontent.com`;
 
